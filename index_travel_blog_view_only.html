@@ -1,0 +1,893 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Travel Blog</title>
+  <meta name="description" content="A database-free travel blog hosted on GitHub Pages." />
+  <style>
+    :root{
+      --bg:#fbfbfd;
+      --text:#0b1324;
+      --muted:rgba(11,19,36,.68);
+      --muted2:rgba(11,19,36,.52);
+      --card:#ffffff;
+      --border:rgba(11,19,36,.10);
+      --shadow: 0 14px 40px rgba(11,19,36,.10);
+      --r:18px;
+      --r2:24px;
+      --accent:#0ea5e9;  /* sky */
+      --accent2:#22c55e; /* green */
+      --accent3:#f97316; /* orange */
+      --max:1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 12% -10%, rgba(14,165,233,.16), transparent 60%),
+        radial-gradient(900px 520px at 92% 10%, rgba(34,197,94,.12), transparent 55%),
+        radial-gradient(900px 520px at 50% 120%, rgba(249,115,22,.10), transparent 60%),
+        var(--bg);
+    }
+
+    a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px 14px 64px}
+
+    /* Top nav */
+    .topbar{
+      position:sticky; top:12px; z-index:50;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      box-shadow: 0 10px 30px rgba(11,19,36,.08);
+    }
+    .brand{display:flex; align-items:center; gap:10px; min-width: 170px}
+    .mark{
+      width:34px; height:34px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(14,165,233,1), rgba(34,197,94,1));
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-weight:900; letter-spacing:.2px;
+      box-shadow: 0 10px 26px rgba(14,165,233,.25);
+      flex:0 0 auto;
+    }
+    .brandTitle{margin:0; font-weight:950; font-size:14px; letter-spacing:.2px}
+    .brandSub{margin:0; font-size:12px; color:var(--muted2)}
+    .nav{display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+    .navBtn{
+      border:1px solid var(--border);
+      background: rgba(11,19,36,.03);
+      color: var(--text);
+      padding:9px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight:850;
+      font-size:12px;
+      transition:.15s transform,.15s background;
+    }
+    .navBtn:hover{transform: translateY(-1px); background: rgba(11,19,36,.06)}
+    .navBtn.active{
+      background: rgba(14,165,233,.14);
+      border-color: rgba(14,165,233,.26);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top:16px;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.65));
+      border-radius: var(--r2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      padding:20px 18px;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(680px 240px at 18% 0%, rgba(14,165,233,.20), transparent 60%),
+        radial-gradient(520px 240px at 92% 30%, rgba(34,197,94,.16), transparent 55%),
+        radial-gradient(620px 260px at 50% 120%, rgba(249,115,22,.12), transparent 60%);
+      pointer-events:none;
+    }
+    .heroInner{position:relative; display:grid; gap:14px}
+    @media (min-width: 920px){
+      .heroInner{grid-template-columns: 1.25fr .75fr; align-items:start}
+    }
+
+    .heroTitle{margin:0; font-size:28px; line-height:1.12; letter-spacing:.2px}
+    .heroDesc{margin:0; color:var(--muted); line-height:1.55; font-size:14px; max-width: 72ch}
+    .heroActions{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px}
+
+    .btn{
+      border:1px solid var(--border);
+      background: rgba(11,19,36,.03);
+      color: var(--text);
+      padding:10px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight:900;
+      font-size:12px;
+      transition:.15s transform,.15s background;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(11,19,36,.06)}
+    .btn.primary{
+      background: rgba(14,165,233,.16);
+      border-color: rgba(14,165,233,.30);
+    }
+    .btn.green{
+      background: rgba(34,197,94,.14);
+      border-color: rgba(34,197,94,.26);
+    }
+
+    .quoteCard{
+      border:1px solid rgba(14,165,233,.18);
+      background: rgba(14,165,233,.08);
+      border-radius: var(--r2);
+      padding:16px 14px;
+    }
+    .quoteLabel{
+      font-size:12px;
+      font-weight:950;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color: rgba(11,19,36,.60);
+      margin:0 0 10px;
+    }
+    .quoteText{
+      margin:0;
+      font-size:16px;
+      font-weight:850;
+      line-height:1.35;
+    }
+    .quoteAuthor{
+      margin:10px 0 0;
+      font-size:12px;
+      color: var(--muted);
+      font-weight:750;
+    }
+
+    /* Search row */
+    .toolbar{
+      margin-top:14px;
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    .search{
+      flex:1;
+      display:flex; align-items:center; gap:8px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.90);
+      border-radius: 999px;
+      padding:10px 12px;
+      min-width: min(420px, 100%);
+    }
+    .search input{
+      width:100%; border:0; outline:0; background:transparent;
+      color:var(--text); font-size:14px;
+    }
+    .search input::placeholder{color: rgba(11,19,36,.45)}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.75);
+      color: var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    /* Sections */
+    .grid{display:grid; gap:14px; margin-top:16px}
+    @media (min-width: 920px){
+      .grid.cols2{grid-template-columns: 1.05fr .95fr}
+    }
+    .card{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.88);
+      border-radius: var(--r2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .cardPad{padding:16px}
+    .cardTitle{margin:0; font-size:18px; letter-spacing:.2px}
+    .meta{display:flex; gap:10px; flex-wrap:wrap; font-size:12px; color:var(--muted2); margin-top:6px}
+
+    .postCard{
+      display:flex; gap:12px; align-items:flex-start; cursor:pointer;
+      padding:14px; border-radius: 18px;
+      border:1px solid rgba(11,19,36,.08);
+      background: rgba(255,255,255,.92);
+      transition:.15s transform,.15s background, .15s box-shadow;
+    }
+    .postCard:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(11,19,36,.10);
+    }
+    .thumb{
+      width:128px; height:84px;
+      border-radius: 16px;
+      border:1px solid rgba(11,19,36,.10);
+      background: linear-gradient(135deg, rgba(14,165,233,.12), rgba(34,197,94,.10));
+      overflow:hidden;
+      flex:0 0 auto;
+      display:flex; align-items:center; justify-content:center;
+      color: rgba(11,19,36,.45);
+      font-weight:950;
+      letter-spacing:.3px;
+      user-select:none;
+    }
+    .thumb img{width:100%; height:100%; object-fit:cover; display:block}
+    .postCard h3{margin:0 0 6px; font-size:16px; line-height:1.25}
+    .postMeta{display:flex; gap:10px; flex-wrap:wrap; font-size:12px; color:var(--muted2)}
+    .excerpt{margin-top:8px; font-size:13px; color: rgba(11,19,36,.80); line-height:1.55}
+    .right{margin-left:auto; display:flex; flex-direction:column; align-items:flex-end; gap:8px; min-width:90px}
+
+    /* Post view */
+    .postView{
+      margin-top:16px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.90);
+      border-radius: var(--r2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:none;
+    }
+    .postHead{
+      padding:16px 16px 12px;
+      border-bottom:1px solid rgba(11,19,36,.08);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(8px);
+      position:sticky;
+      top: 76px; /* below sticky topbar */
+      z-index: 40;
+    }
+    .postHeadTop{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    .postHead h2{margin:0; font-size:22px; line-height:1.2}
+    .content{
+      padding:18px 16px 22px;
+      line-height:1.80;
+      color: rgba(11,19,36,.92);
+      font-size:15px;
+    }
+    .content p{margin:0 0 14px}
+    .content h3{margin:22px 0 10px; font-size:18px}
+    .content h4{margin:18px 0 8px; font-size:16px}
+    .content ul,.content ol{margin:8px 0 14px 20px}
+    .content li{margin:6px 0}
+    .content img{
+      max-width:100%;
+      height:auto;
+      border-radius: 18px;
+      border:1px solid rgba(11,19,36,.12);
+      display:block;
+      margin:12px 0;
+      background: rgba(11,19,36,.02);
+    }
+    .content pre{
+      border:1px solid rgba(11,19,36,.10);
+      background: rgba(11,19,36,.03);
+      padding:12px 14px;
+      border-radius: 18px;
+      overflow:auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 12px 0 16px;
+    }
+    .content code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size: 13px;
+      background: rgba(11,19,36,.04);
+      padding: 2px 6px;
+      border-radius: 8px;
+      border:1px solid rgba(11,19,36,.08);
+    }
+
+    .error{
+      display:none;
+      margin-top:14px;
+      border:1px solid rgba(239,68,68,.24);
+      background: rgba(239,68,68,.07);
+      padding:12px 14px;
+      border-radius: 18px;
+      color:#7a1b1b;
+      white-space:pre-wrap;
+      line-height:1.5;
+    }
+    .footer{
+      margin-top:18px;
+      color: var(--muted2);
+      font-size:12px;
+      text-align:center;
+    }
+    .kbd{
+      border:1px solid rgba(11,19,36,.12);
+      background: rgba(11,19,36,.03);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 950;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="mark" aria-hidden="true">✈</div>
+        <div>
+          <p class="brandTitle" id="siteTitle">Travel Notes</p>
+          <p class="brandSub" id="siteTagline">Tourist destinations, food, and tips</p>
+        </div>
+      </div>
+      <div class="nav">
+        <button class="navBtn active" id="navHome" type="button">Home</button>
+        <button class="navBtn" id="navPosts" type="button">All Posts</button>
+      </div>
+    </div>
+
+    <section class="hero" id="hero">
+      <div class="heroInner">
+        <div>
+          <h1 class="heroTitle" id="heroTitle">Discover places worth remembering.</h1>
+          <p class="heroDesc" id="heroDesc">
+            A simple travel blog — view-only for visitors. New posts are loaded from <span class="pill">posts.json</span>.
+            Upload images to <span class="pill">assets/images/</span> and reference them inside your post content like
+            <span class="pill">![Alt](assets/images/photo.jpg)</span>.
+          </p>
+
+          <div class="heroActions">
+            <button class="btn primary" id="viewAllBtn" type="button">View all posts</button>
+            <button class="btn green" id="randomPostBtn" type="button">Surprise me</button>
+            <span class="pill" id="statusPill">Loading…</span>
+          </div>
+
+          <div class="toolbar">
+            <div class="search" role="search" aria-label="Search posts">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <input id="searchInput" placeholder="Search destinations, cities, food…" autocomplete="off" />
+            </div>
+            <button class="btn" id="sortBtn" type="button">Sort: Newest</button>
+            <button class="btn" id="clearBtn" type="button">Clear</button>
+            <button class="btn" id="refreshBtn" type="button">Reload</button>
+          </div>
+        </div>
+
+        <aside class="quoteCard" aria-label="Travel quote">
+          <p class="quoteLabel">Travel quote</p>
+          <p class="quoteText" id="quoteText">Loading quote…</p>
+          <p class="quoteAuthor" id="quoteAuthor"></p>
+        </aside>
+      </div>
+    </section>
+
+    <div class="error" id="errorBox"></div>
+
+    <!-- Lists -->
+    <section id="homeSection">
+      <div class="grid cols2">
+        <div class="card">
+          <div class="cardPad">
+            <h2 class="cardTitle">Featured post</h2>
+            <div class="meta"><span id="featuredMeta">Newest post</span></div>
+            <div id="featuredSlot" class="grid" style="margin-top:12px"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="cardPad">
+            <h2 class="cardTitle">Latest posts</h2>
+            <div class="meta"><span id="latestCount">0 posts</span><span>•</span><span>Newest first</span></div>
+            <div id="latestList" class="grid" style="margin-top:12px"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="postsSection" style="display:none">
+      <div class="card">
+        <div class="cardPad">
+          <h2 class="cardTitle">All posts</h2>
+          <div class="meta"><span id="countPill">0 posts</span><span>•</span><span>Use search to filter</span></div>
+          <div id="postsList" class="grid" style="margin-top:12px"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Post view -->
+    <section id="postView" class="postView" aria-label="Post view">
+      <div class="postHead">
+        <div class="postHeadTop">
+          <div>
+            <h2 id="postTitle">Post</h2>
+            <div class="postMeta" id="postMeta"></div>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap">
+            <button class="btn" id="backBtn" type="button">Back</button>
+            <button class="btn primary" id="copyLinkBtn" type="button">Copy link</button>
+          </div>
+        </div>
+      </div>
+      <div class="content" id="postContent"></div>
+    </section>
+
+    <div class="footer">
+      Tip: If you don’t see updates immediately, hard refresh <span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">R</span>.
+    </div>
+  </div>
+
+  <script>
+    // ==============================
+    // Travel blog (view-only, no DB)
+    // - Loads ./posts.json
+    // - Hash routes: #home, #posts, #post/<id>
+    // - Images in content: ![Alt](assets/images/photo.jpg)
+    // ==============================
+
+    // Customize site text here:
+    const SITE = {
+      title: "Itinerary Index",
+      tagline: "Tourist destinations,stays, food, and tips",
+      heroTitle: "Discover places worth remembering.",
+      heroDesc: "Tourist destinations, hotels, local food, and travel tips — in a clean, view-only blog.",
+      quotes: [
+        { text: "Travel is the only thing you buy that makes you richer.", author: "Anonymous" },
+        { text: "Not all those who wander are lost.", author: "J.R.R. Tolkien" },
+        { text: "Collect moments, not things.", author: "Anonymous" },
+        { text: "Life is short and the world is wide.", author: "Simon Raven" },
+        { text: "Wherever you go becomes a part of you somehow.", author: "Anita Desai" },
+        { text: "Take only memories, leave only footprints.", author: "Chief Seattle" }
+      ]
+    };
+
+    const state = {
+      posts: [],
+      filtered: [],
+      loaded: false,
+      sort: "newest", // newest | oldest
+      lastListRoute: "#home"
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    function setError(message) {
+      const box = $("errorBox");
+      box.style.display = message ? "block" : "none";
+      box.textContent = message || "";
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+    function escapeAttr(str){ return escapeHtml(str).replaceAll("`","&#096;"); }
+
+    function wordCount(text){
+      return String(text || "").trim().split(/\s+/).filter(Boolean).length;
+    }
+    function readingTime(text){
+      const wc = wordCount(text);
+      const mins = Math.max(1, Math.round(wc / 220));
+      return `${mins} min read`;
+    }
+
+    function firstImageUrl(content){
+      const text = String(content || "");
+      const re = /!\[[^\]]*\]\(([^)]+)\)/;
+      const m = text.match(re);
+      return m ? m[1].trim() : null;
+    }
+
+    function getExcerpt(content){
+      const cleaned = String(content || "").replaceAll(/\s+/g, " ").trim();
+      return cleaned.length > 190 ? cleaned.slice(0, 190) + "…" : cleaned;
+    }
+
+    function formatDate(post){
+      const d = String(post?.date || "").trim();
+      const t = Number(post?.timestamp || 0);
+      if (d && t) return `${d} • ${new Date(t).toLocaleString()}`;
+      if (d) return d;
+      if (t) return new Date(t).toLocaleString();
+      return "";
+    }
+
+    function normalizePosts(raw){
+      if (!Array.isArray(raw)) return [];
+      const out = [];
+      for (const p of raw){
+        if (!p || typeof p !== "object") continue;
+        const id = String(p.id || "").trim();
+        const title = String(p.title || "").trim();
+        const content = String(p.content || "").trim();
+        if (!id || !title || !content) continue;
+        out.push({
+          id, title, content,
+          date: String(p.date || "").trim(),
+          timestamp: Number(p.timestamp || 0),
+          coverImage: typeof p.coverImage === "string" ? p.coverImage : ""
+        });
+      }
+      return out;
+    }
+
+    function sortPosts(arr){
+      const a = [...arr];
+      a.sort((x, y) => (Number(x.timestamp||0) - Number(y.timestamp||0)));
+      return state.sort === "oldest" ? a : a.reverse();
+    }
+
+    // -------- Minimal Markdown --------
+    function mdToHtml(raw){
+      const text = String(raw ?? "").replaceAll("\r\n", "\n");
+
+      // code blocks
+      const codeBlocks = [];
+      const withCodes = text.replaceAll(/```([\s\S]*?)```/g, (_, code) => {
+        const idx = codeBlocks.length;
+        codeBlocks.push(code);
+        return `@@CODEBLOCK_${idx}@@`;
+      });
+
+      const lines = withCodes.split("\n");
+      const out = [];
+      let inUl = false, inOl = false;
+
+      const closeLists = () => {
+        if (inUl){ out.push("</ul>"); inUl = false; }
+        if (inOl){ out.push("</ol>"); inOl = false; }
+      };
+
+      const renderInline = (s) => {
+        // images
+        const re = /!\[([^\]]*)\]\(([^)]+)\)/g;
+        let last = 0;
+        let html = "";
+        for (const m of s.matchAll(re)){
+          const idx = m.index ?? 0;
+          html += escapeHtml(s.slice(last, idx));
+          const alt = escapeAttr(m[1] || "");
+          const url = escapeAttr((m[2] || "").trim());
+          html += `<img alt="${alt}" src="${url}" loading="lazy" />`;
+          last = idx + m[0].length;
+        }
+        html += escapeHtml(s.slice(last));
+
+        // inline code: `code`
+        html = html.replaceAll(/`([^`]+)`/g, (_, c) => `<code>${escapeHtml(c)}</code>`);
+        return html;
+      };
+
+      for (const line of lines){
+        const trimmed = line.trim();
+
+        if (trimmed === ""){
+          closeLists();
+          out.push("<p></p>");
+          continue;
+        }
+
+        const h = trimmed.match(/^(#{2,3})\s+(.*)$/);
+        if (h){
+          closeLists();
+          const level = h[1].length === 2 ? "h3" : "h4";
+          out.push(`<${level}>${renderInline(h[2])}</${level}>`);
+          continue;
+        }
+
+        // ordered list
+        const ol = trimmed.match(/^\d+\.\s+(.*)$/);
+        if (ol){
+          if (!inOl){ closeLists(); out.push("<ol>"); inOl = true; }
+          out.push(`<li>${renderInline(ol[1])}</li>`);
+          continue;
+        }
+
+        // unordered bullets: -, *, •
+        const ul = trimmed.match(/^(?:•|\-|\*)\s+(.*)$/);
+        if (ul){
+          if (!inUl){ closeLists(); out.push("<ul>"); inUl = true; }
+          out.push(`<li>${renderInline(ul[1])}</li>`);
+          continue;
+        }
+
+        closeLists();
+        out.push(`<p>${renderInline(trimmed)}</p>`);
+      }
+
+      closeLists();
+
+      let html = out.join("\n");
+
+      // restore code blocks
+      html = html.replaceAll(/@@CODEBLOCK_(\d+)@@/g, (_, n) => {
+        const code = codeBlocks[Number(n)] ?? "";
+        return `<pre><code>${escapeHtml(code.trim())}</code></pre>`;
+      });
+
+      // compress repeated empty paragraphs
+      html = html.replaceAll(/<p><\/p>\s*(<p><\/p>\s*)+/g, "<p></p>");
+      return html;
+    }
+
+    // -------- UI --------
+    function showSection(section){
+      $("homeSection").style.display = section === "home" ? "block" : "none";
+      $("postsSection").style.display = section === "posts" ? "block" : "none";
+      $("postView").style.display = section === "post" ? "block" : "none";
+
+      $("navHome").classList.toggle("active", section === "home");
+      $("navPosts").classList.toggle("active", section === "posts");
+
+      $("hero").style.display = section === "post" ? "none" : "block";
+    }
+
+    function setQuoteRandom(){
+      const q = SITE.quotes[Math.floor(Math.random() * SITE.quotes.length)];
+      $("quoteText").textContent = q?.text || "Travel more. Worry less.";
+      $("quoteAuthor").textContent = q?.author ? "— " + q.author : "";
+    }
+
+    function setSiteText(){
+      document.title = SITE.title || "Travel Blog";
+      $("siteTitle").textContent = SITE.title || "Travel Notes";
+      $("siteTagline").textContent = SITE.tagline || "Travel blog";
+      $("heroTitle").textContent = SITE.heroTitle || "Discover places worth remembering.";
+      $("heroDesc").textContent = SITE.heroDesc || $("heroDesc").textContent;
+    }
+
+    function makePostCard(post){
+      const el = document.createElement("div");
+      el.className = "postCard";
+      el.tabIndex = 0;
+      el.setAttribute("role", "button");
+      el.dataset.postId = post.id;
+
+      const thumbUrl = post.coverImage || firstImageUrl(post.content);
+
+      el.innerHTML = `
+        <div class="thumb" aria-hidden="true">
+          ${thumbUrl ? `<img src="${escapeAttr(thumbUrl)}" alt="" loading="lazy" />` : "TRIP"}
+        </div>
+        <div style="min-width:0">
+          <h3 title="${escapeAttr(post.title)}">${escapeHtml(post.title)}</h3>
+          <div class="postMeta">
+            ${formatDate(post) ? `<span>${escapeHtml(formatDate(post))}</span>` : ""}
+            <span>•</span>
+            <span>${escapeHtml(readingTime(post.content))}</span>
+          </div>
+          <div class="excerpt">${escapeHtml(getExcerpt(post.content))}</div>
+        </div>
+        <div class="right">
+          <button class="btn primary" type="button">Read</button>
+        </div>
+      `;
+
+      const open = () => { location.hash = `#post/${encodeURIComponent(post.id)}`; };
+
+      el.addEventListener("click", open);
+      el.addEventListener("keydown", (e) => { if (e.key === "Enter") open(); });
+
+      return el;
+    }
+
+    function renderLists(){
+      const featured = $("featuredSlot");
+      const latest = $("latestList");
+      const list = $("postsList");
+      featured.innerHTML = "";
+      latest.innerHTML = "";
+      list.innerHTML = "";
+
+      const all = sortPosts(state.filtered);
+
+      $("countPill").textContent = `${all.length} post${all.length === 1 ? "" : "s"}`;
+      $("latestCount").textContent = `${state.posts.length} post${state.posts.length === 1 ? "" : "s"}`;
+      $("statusPill").textContent = state.loaded ? `${state.posts.length} loaded` : "Loading…";
+
+      // Featured = first post in sorted list
+      if (all.length > 0){
+        const p0 = all[0];
+        featured.appendChild(makePostCard(p0));
+        $("featuredMeta").textContent = "Featured • " + (formatDate(p0) || "Newest");
+      } else {
+        const empty = document.createElement("div");
+        empty.className = "postCard";
+        empty.innerHTML = `
+          <div style="min-width:0">
+            <h3>No posts yet</h3>
+            <div class="postMeta">Add posts by updating <span class="pill">posts.json</span> in your repo.</div>
+          </div>
+        `;
+        featured.appendChild(empty);
+      }
+
+      // Latest = next 3 posts
+      for (const p of all.slice(0, 3)) latest.appendChild(makePostCard(p));
+
+      // All posts
+      for (const p of all) list.appendChild(makePostCard(p));
+
+      if (all.length === 0){
+        const emptyAll = document.createElement("div");
+        emptyAll.className = "card";
+        emptyAll.innerHTML = `<div class="cardPad"><h2 class="cardTitle">No posts yet</h2><div class="meta">Update posts.json to publish.</div></div>`;
+        list.appendChild(emptyAll);
+      }
+    }
+
+    function openPost(id){
+      const post = state.posts.find(p => p.id === id);
+      if (!post){
+        setError("Post not found. It may have been removed or the URL is wrong.");
+        location.hash = state.lastListRoute || "#home";
+        return;
+      }
+
+      $("postTitle").textContent = post.title;
+      const metaParts = [];
+      const fd = formatDate(post);
+      if (fd) metaParts.push(fd);
+      metaParts.push(readingTime(post.content));
+      $("postMeta").textContent = metaParts.join(" • ");
+
+      $("postContent").innerHTML = mdToHtml(post.content);
+
+      showSection("post");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function applySearch(){
+      const q = $("searchInput").value.trim().toLowerCase();
+      if (!q){
+        state.filtered = [...state.posts];
+        renderLists();
+        return;
+      }
+      state.filtered = state.posts.filter(p => {
+        return (p.title || "").toLowerCase().includes(q) || (p.content || "").toLowerCase().includes(q);
+      });
+      renderLists();
+    }
+
+    function setSort(next){
+      state.sort = next;
+      $("sortBtn").textContent = state.sort === "oldest" ? "Sort: Oldest" : "Sort: Newest";
+      renderLists();
+    }
+
+    function copyLink(){
+      const url = location.href;
+      navigator.clipboard?.writeText(url).then(() => {
+        $("copyLinkBtn").textContent = "Copied!";
+        setTimeout(() => $("copyLinkBtn").textContent = "Copy link", 900);
+      }).catch(() => {
+        prompt("Copy this link:", url);
+      });
+    }
+
+    function parseRoute(){
+      const h = location.hash || "#home";
+      if (h.startsWith("#post/")){
+        const id = decodeURIComponent(h.slice("#post/".length));
+        openPost(id);
+        return;
+      }
+      if (h === "#posts"){
+        state.lastListRoute = "#posts";
+        showSection("posts");
+        return;
+      }
+      state.lastListRoute = "#home";
+      showSection("home");
+    }
+
+    function openRandomPost(){
+      const all = sortPosts(state.posts);
+      if (all.length === 0) return;
+      const p = all[Math.floor(Math.random() * all.length)];
+      location.hash = `#post/${encodeURIComponent(p.id)}`;
+    }
+
+    async function loadPosts(){
+      setError("");
+      state.loaded = false;
+      $("statusPill").textContent = "Loading…";
+
+      try{
+        const res = await fetch(`posts.json?v=${Date.now()}`, { cache: "no-store" });
+        if (!res.ok) throw new Error(`Failed to load posts.json (${res.status})`);
+        const raw = await res.json();
+        const posts = normalizePosts(raw);
+        state.posts = posts;
+        state.filtered = [...posts];
+        state.loaded = true;
+
+        renderLists();
+        parseRoute();
+      }catch(err){
+        console.error(err);
+        state.posts = [];
+        state.filtered = [];
+        state.loaded = true;
+        renderLists();
+        setError(
+          "Could not load posts.json.\n\n" +
+          "Fix:\n" +
+          "1) Ensure posts.json is in the repo root (same folder as index.html)\n" +
+          "2) Ensure it is valid JSON (starts with [ and ends with ])\n\n" +
+          "Details: " + (err?.message || String(err))
+        );
+      }
+    }
+
+    // -------- Events --------
+    document.addEventListener("DOMContentLoaded", () => {
+      setSiteText();
+      setQuoteRandom();
+      // rotate quote every 10s
+      setInterval(setQuoteRandom, 10000);
+
+      $("navHome").addEventListener("click", () => location.hash = "#home");
+      $("navPosts").addEventListener("click", () => location.hash = "#posts");
+      $("viewAllBtn").addEventListener("click", () => location.hash = "#posts");
+      $("randomPostBtn").addEventListener("click", openRandomPost);
+
+      $("refreshBtn").addEventListener("click", loadPosts);
+
+      $("searchInput").addEventListener("input", () => {
+        window.clearTimeout(window.__srch);
+        window.__srch = window.setTimeout(applySearch, 120);
+      });
+
+      $("clearBtn").addEventListener("click", () => {
+        $("searchInput").value = "";
+        applySearch();
+      });
+
+      $("sortBtn").addEventListener("click", () => {
+        setSort(state.sort === "newest" ? "oldest" : "newest");
+      });
+
+      $("backBtn").addEventListener("click", () => {
+        location.hash = state.lastListRoute || "#home";
+      });
+
+      $("copyLinkBtn").addEventListener("click", copyLink);
+
+      window.addEventListener("hashchange", parseRoute);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape"){
+          if ($("postView").style.display !== "none"){
+            location.hash = state.lastListRoute || "#home";
+          }
+        }
+      });
+
+      loadPosts();
+    });
+  </script>
+</body>
+</html>
