@@ -472,13 +472,14 @@
       return cleaned.length > 190 ? cleaned.slice(0, 190) + "…" : cleaned;
     }
 
-    function formatDate(post){
-      const d = String(post?.date || "").trim();
-      const t = Number(post?.timestamp || 0);
-      if (d && t) return `${d} • ${new Date(t).toLocaleString()}`;
-      if (d) return d;
-      if (t) return new Date(t).toLocaleString();
-      return "";
+     function formatDate(post){
+      // Avoid showing date twice when both `date` and `timestamp` exist.
+      // Use `date` for display if provided; otherwise fall back to timestamp.
+    const d = String(post?.date || "").trim();
+    const t = Number(post?.timestamp || 0);
+    if (d) return d;
+    if (t) return new Date(t).toLocaleString();
+    return "";
     }
 
     function normalizePosts(raw){
