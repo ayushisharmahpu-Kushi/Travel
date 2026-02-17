@@ -353,9 +353,53 @@
       .card .cta .btn{min-width:110px}
       .excerpt{white-space:normal; word-break:break-word; hyphens:auto}
     }
-  </style>
+  
+
+    /* Plane intro animation (runs once on page load) */
+    #planeIntro{
+      position:fixed;
+      left:0;
+      top:14vh;
+      z-index:9999;
+      pointer-events:none;
+      opacity:0;
+      transform: translate3d(-30vw, 0, 0) rotate(8deg);
+      will-change: transform, opacity;
+    }
+    #planeIntro.fly{
+      animation: planeFly 2.8s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    #planeIntro .plane{
+      font-size:44px;
+      filter: drop-shadow(0 10px 12px rgba(15,23,42,.20));
+    }
+    #planeIntro .trail{
+      position:absolute;
+      left:-140px;
+      top:50%;
+      width:140px;
+      height:3px;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.9));
+      transform: translateY(-50%);
+      border-radius:999px;
+      opacity:.9;
+    }
+    @keyframes planeFly{
+      0%   { transform: translate3d(-30vw, 0, 0) rotate(8deg); opacity:0; }
+      10%  { opacity:1; }
+      90%  { opacity:1; }
+      100% { transform: translate3d(130vw, -10vh, 0) rotate(8deg); opacity:0; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      #planeIntro{ display:none !important; }
+    }
+
+</style>
 </head>
 <body>
+  <!-- Plane intro (appears once on page load) -->
+  <div id="planeIntro" aria-hidden="true"><div class="trail"></div><div class="plane">✈️</div></div>
+
   <div class="wrap">
     <div class="top">
       <div class="brand" role="banner">
@@ -953,6 +997,25 @@
   // Init
   pickRandomQuote();
   loadPosts().then(() => handleHash());
+
+
+  /**********************
+   * Plane intro (one-time on load)
+   **********************/
+  function runPlaneIntro(){
+    const plane = document.getElementById('planeIntro');
+    if (!plane) return;
+    // restart animation safely
+    plane.classList.remove('fly');
+    void plane.offsetWidth;
+    plane.classList.add('fly');
+    plane.addEventListener('animationend', () => {
+      plane.remove();
+    }, { once:true });
+  }
+
+  window.addEventListener('load', runPlaneIntro);
+
 </script>
 </body>
 </html>
