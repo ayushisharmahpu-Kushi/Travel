@@ -449,17 +449,33 @@
   /**********************
    * Small utilities
    **********************/
-  function getBasePath(){
-    const p = window.location.pathname;
-    return p.endsWith('/') ? p : p.slice(0, p.lastIndexOf('/') + 1);
+  function getBaseUrl(){
+    // Robust base URL for GitHub Pages project sites.
+    // Handles these cases:
+    // - /Travel/          (directory)
+    // - /Travel/index.html (file)
+    // - /Travel           (missing trailing slash)
+    const u = new URL(window.location.href);
+    u.hash = '';
+    if (u.pathname.endsWith('/')) return u;
+    if (u.pathname.toLowerCase().endsWith('.html')){
+      u.pathname = u.pathname.slice(0, u.pathname.lastIndexOf('/') + 1);
+      return u;
+    }
+    // Treat as directory when no extension and no trailing slash
+    u.pathname = u.pathname + '/';
+    return u;
   }
 
   function resolveUrl(path){
     if (!path) return '';
     if (/^https?:\/\//i.test(path) || path.startsWith('data:')) return path;
-    const base = getBasePath();
-    return base + String(path).replace(/^\/+/, '');
+    const base = getBaseUrl();
+    // Remove leading slashes so we resolve within the project folder
+    const clean = String(path).replace(/^\/+/, '');
+    return new URL(clean, base).toString();
   }
+
 
   // Make background image path work in GitHub Pages subfolders (e.g. /Travel/)
   (function setBgUrl(){
