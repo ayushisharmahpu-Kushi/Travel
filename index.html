@@ -354,6 +354,15 @@
       return m ? m[1].trim() : null;
     }
 
+    function cacheBust(url, post){
+      const u = String(url || "").trim();
+      if (!u) return "";
+      // Don't modify absolute URLs or ones that already have query params.
+      if (/^https?:\/\//i.test(u) || u.includes("?")) return u;
+      const v = Number(post?.timestamp || 0) || Date.now();
+      return `${u}?v=${v}`;
+    }
+
     function formatDate(post){
       // Avoid showing the date twice when both `date` (string) and `timestamp` exist.
       // Use `date` for display if provided; otherwise fall back to timestamp.
