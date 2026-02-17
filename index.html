@@ -484,23 +484,30 @@
       };
 
       const renderInline = (s) => {
-        const re = /!\[([^\]]*)\]\(([^)]+)\)/g;
+        // Images: ![alt](src)
+        const imgRe = /!\[([^\]]*)\]\(([^)]+)\)/g;
         let last = 0;
-        let html = "";
-        for (const m of s.matchAll(re)){
+        let out = "";
+        for (const m of s.matchAll(imgRe)) {
           const idx = m.index ?? 0;
-          html += escapeHtml(s.slice(last, idx));
-          const alt = escapeAttr(m[1] || "");
-          let urlRaw = (m[2] || "").trim();
-          // Cache-bust relative images to avoid stale 404s on GitHub Pages.
-          if (urlRaw && !/^https?:\/\//i.test(urlRaw) && !urlRaw.includes("?")) urlRaw = `${urlRaw}?v=${Date.now()}`;
-          const url = escapeAttr(urlRaw);
-          html += `<img alt="${alt}" src="${url}" loading="lazy" />`;
+          out += escapeHtml(s.slice(last, idx));
+          const alt = escapeHtml(m[1] ?? "");
+          const src = (m[2] ?? "").trim();
+          out += `<img src="${src}" alt="${alt}" style="max-width:100%;border-radius:14px;box-shadow:var(--shadow);margin:10px 0">`;
           last = idx + m[0].length;
         }
-        html += escapeHtml(s.slice(last));
-        html = html.replaceAll(/`([^`]+)`/g, (_, c) => `<code>${escapeHtml(c)}</code>`);
-        return html;
+        out += escapeHtml(s.slice(last));
+
+        // Links: [text](url) (http/https only)
+        out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+
+        // Bold: **text**
+        out = out.replace(/\*\*([^*][\s\S]*?)\*\*/g, "<strong>$1</strong>");
+
+        // Italic: *text* (simple)
+        out = out.replace(/(^|[\s(>])\*([^*][^*]*?)\*(?=[\s)<.,!?]|$)/g, "$1<em>$2</em>");
+
+        return out;
       };
 
       for (const line of lines){
@@ -663,8 +670,13 @@
       $("postMeta").textContent = parts.join(" • ");
       $("postContent").innerHTML = mdToHtml(post.content);
       showSection("post");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+      // Ensure we start at the top of the post on mobile (some browsers keep previous scroll)
+      requestAnimationFrame(() => {
+        try { window.scrollTo(0, 0); } catch(_) {}
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      });
+      }
 
     function applySearch(){
       const q = $("searchInput").value.trim().toLowerCase();
