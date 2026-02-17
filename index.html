@@ -6,8 +6,353 @@
   <title>Itinerary Index</title>
   <meta name="description" content="Travel destinations, stays, food, and tips." />
   <style>
-    /* Your existing CSS from the snippet above (no changes needed) */
-    /* Paste all your previous CSS here */
+    :root{
+      --bg1:#f8fbff;
+      --bg2:#fff7f0;
+      --card:#ffffffcc;
+      --cardSolid:#fff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --border:#e5e7eb;
+      --shadow:0 14px 45px rgba(15,23,42,.10);
+      --shadowSoft:0 12px 34px rgba(15,23,42,.08);
+      --pill:#e6f4ff;
+      --pill2:#e9fff1;
+      --accent:#22c55e;
+      --accent2:#3b82f6;
+      --radius:24px;
+      --radiusSm:16px;
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;
+      isolation:isolate;
+      background:transparent;
+    }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: linear-gradient(135deg, #f8fbff, #fff7f0);
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    /* Photo-style travel background.
+       Put your background image at: assets/images/travel-bg.jpg */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:url("assets/images/travel-bg.jpg") center/cover no-repeat;
+      /* brighter + more visible */
+      opacity:.50;
+      filter:saturate(1.08) contrast(1.06) brightness(1.10);
+      transform:scale(1.06);
+      animation:photoDrift 22s ease-in-out infinite alternate;
+      z-index:-2;
+      pointer-events:none;
+    }
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      /* slightly lighter overlay so the photo shows more */
+      background:
+        radial-gradient(900px 520px at 20% 10%, rgba(255,255,255,.62), rgba(255,255,255,0) 60%),
+        radial-gradient(900px 520px at 85% 0%, rgba(255,255,255,.50), rgba(255,255,255,0) 55%),
+        linear-gradient(135deg, rgba(248,251,255,.74), rgba(255,247,240,.74));
+      z-index:-1;
+      pointer-events:none;
+    }
+    @keyframes photoDrift{
+      from{ transform:scale(1.06) translate3d(-1%, -1%, 0); }
+      to  { transform:scale(1.12) translate3d( 1%,  1%, 0); }
+    }
+
+    a{color:inherit}
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 70px; position:relative; z-index:1;}
+
+    /* Top bar */
+    .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:rgba(255,255,255,.7);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadowSoft);
+    }
+
+    .brand{display:flex; align-items:center; gap:10px; min-width:0;}
+    .logo{
+      width:38px; height:38px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(59,130,246,.28), rgba(34,197,94,.22));
+      display:grid; place-items:center;
+      border:1px solid rgba(15,23,42,.08);
+      flex:0 0 auto;
+    }
+    .logo span{font-size:18px}
+    .brand h1{font-size:16px; margin:0; line-height:1.1}
+    .brand p{margin:0; font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+
+    .nav{display:flex; gap:8px; flex:0 0 auto;}
+    .btn{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.75);
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:600;
+      cursor:pointer;
+      transition:transform .06s ease, background .2s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn.primary{background:rgba(59,130,246,.15); border-color:rgba(59,130,246,.35)}
+    .btn.green{background:rgba(34,197,94,.15); border-color:rgba(34,197,94,.35)}
+
+    /* Hero */
+    .hero{
+      margin-top:18px;
+      padding:22px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.62);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .heroGrid{display:grid; grid-template-columns: 1.3fr .9fr; gap:16px; align-items:stretch;}
+
+    .hero h2{margin:0 0 6px; font-size:32px; letter-spacing:-.02em; line-height:1.12}
+    .hero .sub{margin:0 0 14px; color:var(--muted); font-size:15px}
+
+    .heroActions{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+    .statPill{padding:9px 12px; border-radius:999px; border:1px solid var(--border); background:rgba(255,255,255,.7); font-weight:600; color:var(--muted); font-size:13px}
+
+    .searchRow{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; align-items:center}
+    .search{
+      flex: 1 1 320px;
+      display:flex; align-items:center; gap:10px;
+      padding:11px 14px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:rgba(255,255,255,.8);
+    }
+    .search input{border:none; outline:none; background:transparent; width:100%; font-size:14px}
+
+    .quote{
+      border:1px solid rgba(34,197,94,.25);
+      background: rgba(34,197,94,.10);
+      border-radius:var(--radius);
+      padding:18px 18px 16px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:8px;
+      min-height:150px;
+    }
+    .quote .kicker{letter-spacing:.18em; font-size:12px; font-weight:800; color:rgba(15,23,42,.55)}
+    .quote .text{font-size:20px; margin:0; font-weight:800; line-height:1.25}
+    .quote .by{margin:0; color:var(--muted); font-weight:700}
+
+    .toolbar{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;
+      align-items:center; justify-content:flex-start;
+    }
+
+    .chip{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.78);
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    /* Sections */
+    .grid{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+    }
+
+    .panel{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.70);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadowSoft);
+      padding:18px;
+      min-height:200px;
+    }
+    .panel h3{margin:0 0 6px; font-size:20px}
+    .panel .meta{color:var(--muted); font-size:13px; display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+
+    /* Cards */
+    .card{
+      border:1px solid rgba(15,23,42,.08);
+      background:rgba(255,255,255,.85);
+      border-radius:var(--radius);
+      box-shadow: 0 10px 30px rgba(15,23,42,.06);
+      padding:16px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      margin-top:14px;
+      overflow:hidden;
+    }
+    .thumb{
+      width:110px; height:82px;
+      border-radius:18px;
+      border:1px solid rgba(15,23,42,.10);
+      background: linear-gradient(135deg, rgba(59,130,246,.10), rgba(34,197,94,.10));
+      flex:0 0 auto;
+      display:block;
+      object-fit:cover;
+    }
+    .thumbFallback{
+      width:110px; height:82px;
+      border-radius:18px;
+      border:1px solid rgba(15,23,42,.10);
+      background: linear-gradient(135deg, rgba(59,130,246,.10), rgba(34,197,94,.10));
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      color:rgba(15,23,42,.45);
+      font-weight:900;
+      letter-spacing:.1em;
+    }
+
+    .card h4{margin:0; font-size:18px; line-height:1.2}
+    .card .info{min-width:0; flex:1 1 auto}
+    .card .small{margin-top:6px; color:var(--muted); font-size:13px; display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .card .excerpt{margin:10px 0 0; color:#1f2937; font-size:14px; line-height:1.45}
+
+    .card .cta{
+      flex:0 0 auto;
+      margin-left:auto;
+      align-self:flex-start;
+    }
+
+    /* Detail view */
+    .postView{display:none;}
+    .postShell{
+      margin-top:16px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .postHead{
+      position:sticky;
+      top:0;
+      z-index:30;
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(15,23,42,.08);
+      padding:18px;
+    }
+
+    .postTitleRow{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    .postTitle{margin:0; font-size:32px; letter-spacing:-.02em; line-height:1.15}
+    .postMeta{color:var(--muted); font-weight:700; font-size:13px; margin-top:6px; display:flex; gap:10px; flex-wrap:wrap}
+
+    .postBtns{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+
+    .postCover{
+      margin-top:14px;
+      border-radius:18px;
+      border:1px solid rgba(15,23,42,.10);
+      overflow:hidden;
+      background:rgba(15,23,42,.03);
+    }
+    .postCover img{width:100%; height:auto; display:block; max-height:320px; object-fit:cover}
+
+    .postLead{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:18px;
+      border:1px solid rgba(59,130,246,.18);
+      background: rgba(59,130,246,.08);
+      color:#0f172a;
+      font-size:16px;
+      line-height:1.6;
+    }
+
+    .postBody{padding:18px;}
+
+    /* Markdown-ish styles */
+    #postContent{
+      font-size:16px;
+      line-height:1.75;
+      color:#0f172a;
+      overflow-wrap:anywhere;
+    }
+    #postContent h2{font-size:22px; margin:26px 0 10px}
+    #postContent h3{font-size:18px; margin:22px 0 8px}
+    #postContent p{margin:10px 0}
+    #postContent ul{margin:10px 0 12px 20px}
+    #postContent li{margin:7px 0}
+    #postContent hr{border:none; border-top:1px solid rgba(15,23,42,.10); margin:18px 0}
+    #postContent img{max-width:100%; border-radius:16px; border:1px solid rgba(15,23,42,.10); box-shadow: 0 10px 30px rgba(15,23,42,.06)}
+    #postContent figure{margin:14px 0}
+    #postContent figcaption{color:var(--muted); font-size:12px; margin-top:6px}
+    #postContent a{color:#2563eb; text-decoration:none; font-weight:700}
+    #postContent a:hover{text-decoration:underline}
+
+    /* Helpers */
+    .muted{color:var(--muted)}
+    .err{
+      margin-top:16px;
+      border:1px solid rgba(239,68,68,.25);
+      background: rgba(239,68,68,.08);
+      padding:14px 16px;
+      border-radius:18px;
+      color:#7f1d1d;
+      font-weight:700;
+      white-space:pre-wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroGrid{grid-template-columns:1fr}
+      .hero h2{font-size:28px}
+      .grid{grid-template-columns:1fr}
+      .thumb,.thumbFallback{width:96px; height:72px; border-radius:16px}
+      .postTitle{font-size:26px}
+      .postCover img{max-height:240px}
+    }
+
+    @media (max-width: 520px){
+      .wrap{padding:18px 12px 56px}
+      .hero{padding:16px}
+      .hero h2{font-size:24px}
+      .top{padding:12px 12px}
+      .btn{padding:9px 12px}
+      .panel{padding:14px}
+      .card{padding:14px; gap:12px}
+      .card h4{font-size:16px}
+      .postHead{padding:14px}
+      .postBody{padding:14px}
+      .postTitle{font-size:22px}
+      .postCover img{max-height:200px}
+      .postLead{font-size:15px}
+      /* Mobile: prevent ultra-narrow excerpts by moving CTA to its own row */
+      .card{flex-wrap:wrap}
+      .card .thumb{width:72px; height:72px; border-radius:16px}
+      .card .info{flex:1 1 0; min-width:0}
+      .card .cta{width:100%; margin-left:0; display:flex; justify-content:flex-end}
+      .card .cta .btn{min-width:110px}
+      .excerpt{white-space:normal; word-break:break-word; hyphens:auto}
+    }
   </style>
 </head>
 <body>
@@ -103,14 +448,511 @@
   </div>
 
 <script>
-  // All JS from your previous snippet goes here
-  // Just copy-paste everything from <script> in your original code
-  // This includes:
-  // - utilities (escapeHtml, formatDate, stripMarkdown)
-  // - state management (posts, filtered, quotes)
-  // - rendering functions (card, render, mdToHtml)
-  // - event listeners (buttons, hashchange)
-  // - loadPosts() and tryFetchJson() logic
+  /**********************
+   * Global error surfacing (so "0 loaded" isn't silent)
+   **********************/
+  window.addEventListener('error', (ev) => {
+    const msg = (ev && ev.error && ev.error.message) ? ev.error.message : (ev && ev.message) ? ev.message : 'Unknown error';
+    showError('JavaScript error:\\n\\n' + msg + '\\n\\nOpen DevTools → Console for full details.');
+  });
+
+  /**********************
+   * Small utilities
+   **********************/
+  function getBasePath(){
+    const p = window.location.pathname;
+    return p.endsWith('/') ? p : p.slice(0, p.lastIndexOf('/') + 1);
+  }
+
+  function resolveUrl(path){
+    if (!path) return '';
+    if (/^https?:\/\//i.test(path) || path.startsWith('data:')) return path;
+    const base = getBasePath();
+    return base + String(path).replace(/^\/+/, '');
+  }
+
+  function safeText(v){
+    return (v == null) ? '' : String(v);
+  }
+
+  function escapeHtml(str){
+    return safeText(str)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#39;');
+  }
+
+  function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+  function formatDate(post){
+    if (post && post.date && typeof post.date === 'string') return post.date;
+    const ts = Number(post?.timestamp);
+    if (!Number.isFinite(ts)) return '';
+    try {
+      const d = new Date(ts);
+      return d.toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+    } catch { return ''; }
+  }
+
+  function estimateReadTime(md){
+    const text = safeText(md).replace(/\s+/g,' ').trim();
+    if (!text) return 1;
+    const words = text.split(' ').length;
+    return clamp(Math.round(words / 200), 1, 20);
+  }
+
+  function cacheBust(url){
+    if (!url) return '';
+    const sep = url.includes('?') ? '&' : '?';
+    return url + sep + 'v=' + Date.now();
+  }
+
+  function stripMarkdown(md){
+    return safeText(md)
+      .replace(/!\[[^\]]*\]\([^)]+\)/g,'')
+      .replace(/\[[^\]]*\]\([^)]+\)/g,'')
+      .replace(/[#>*_`~\-]/g,'')
+      .replace(/\s+/g,' ')
+      .trim();
+  }
+
+  function extractFirstImage(md){
+    const m = safeText(md).match(/!\[[^\]]*\]\(([^)]+)\)/);
+    return m ? m[1].trim() : '';
+  }
+
+  function extractLeadAndRest(md){
+    const lines = safeText(md).split(/\r?\n/);
+    let i = 0;
+
+    while (i < lines.length) {
+      const t = lines[i].trim();
+      if (!t) { i++; continue; }
+      if (t.startsWith('![')) { i++; continue; }
+      if (/^#{1,6}\s+/.test(t)) { break; }
+      break;
+    }
+
+    let leadLines = [];
+    while (i < lines.length) {
+      const t = lines[i].trim();
+      if (!t) break;
+      if (/^#{1,6}\s+/.test(t)) break;
+      if (t === '---') break;
+      leadLines.push(lines[i]);
+      i++;
+    }
+
+    const lead = stripMarkdown(leadLines.join('\n')).trim();
+    const rest = lines.slice(i).join('\n');
+    return { lead, rest };
+  }
+
+  /**********************
+   * Minimal markdown -> HTML
+   **********************/
+  function renderInline(text){
+    let out = '';
+    const s = safeText(text);
+    let i = 0;
+
+    while (i < s.length) {
+      if (s[i] === '[') {
+        const close = s.indexOf(']', i);
+        const openParen = close !== -1 ? s.indexOf('(', close) : -1;
+        const closeParen = openParen !== -1 ? s.indexOf(')', openParen) : -1;
+        if (close !== -1 && openParen === close + 1 && closeParen !== -1) {
+          const label = s.slice(i + 1, close);
+          const href = s.slice(openParen + 1, closeParen).trim();
+          out += `<a href="${escapeHtml(resolveUrl(href))}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`;
+          i = closeParen + 1;
+          continue;
+        }
+      }
+      out += escapeHtml(s[i]);
+      i++;
+    }
+
+    out = out
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+    return out;
+  }
+
+  function mdToHtml(md){
+    const lines = safeText(md).split(/\r?\n/);
+    let html = '';
+    let inList = false;
+
+    const closeList = () => { if (inList){ html += '</ul>'; inList = false; } };
+
+    for (let idx = 0; idx < lines.length; idx++) {
+      const raw = lines[idx];
+      const line = raw.trim();
+      if (!line){ closeList(); continue; }
+
+      if (line === '---') { closeList(); html += '<hr />'; continue; }
+
+      if (line.startsWith('![')){
+        closeList();
+        const m = line.match(/^!\[([^\]]*)\]\(([^)]+)\)/);
+        if (m){
+          const alt = m[1];
+          const src = resolveUrl(m[2].trim());
+          html += `<figure><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy" /></figure>`;
+          continue;
+        }
+      }
+
+      const h = line.match(/^(#{1,6})\s+(.+)$/);
+      if (h){
+        closeList();
+        const level = clamp(h[1].length, 2, 3);
+        html += `<h${level}>${renderInline(h[2])}</h${level}>`;
+        continue;
+      }
+
+      const boldLine = line.match(/^\*\*(.+?)\*\*$/);
+      if (boldLine){
+        closeList();
+        html += `<h3>${renderInline(boldLine[1])}</h3>`;
+        continue;
+      }
+
+      const li = line.match(/^[-•]\s+(.+)$/);
+      if (li){
+        if (!inList){ html += '<ul>'; inList = true; }
+        html += `<li>${renderInline(li[1])}</li>`;
+        continue;
+      }
+
+      closeList();
+      html += `<p>${renderInline(line)}</p>`;
+    }
+
+    closeList();
+    return html;
+  }
+
+  /**********************
+   * App state
+   **********************/
+  const state = {
+    posts: [],
+    filtered: [],
+    newestFirst: true,
+    quotes: [
+      { t: 'Take only memories, leave only footprints.', b: 'Chief Seattle' },
+      { t: 'Travel is the only thing you buy that makes you richer.', b: 'Anonymous' },
+      { t: 'Not all those who wander are lost.', b: 'J.R.R. Tolkien' },
+      { t: 'Life is short and the world is wide.', b: 'Simon Raven' },
+      { t: 'Wherever you go becomes a part of you somehow.', b: 'Anita Desai' },
+    ]
+  };
+
+  const el = (id) => document.getElementById(id);
+
+  function showError(msg){
+    const box = el('errorBox');
+    if (!box) return;
+    box.style.display = 'block';
+    box.textContent = msg;
+  }
+
+  function clearError(){
+    const box = el('errorBox');
+    if (!box) return;
+    box.style.display = 'none';
+    box.textContent = '';
+  }
+
+  function normalizePosts(list){
+    const arr = Array.isArray(list) ? list : [];
+    return arr
+      .map(p => {
+        const ts = Number(p?.timestamp);
+        const safeTs = Number.isFinite(ts) ? ts : Date.now();
+        const content = safeText(p?.content);
+        const cover = safeText(p?.coverImage || p?.cover_image || p?.cover || '') || extractFirstImage(content);
+        return {
+          id: safeText(p?.id) || ('post-' + safeTs),
+          title: safeText(p?.title) || 'Untitled',
+          content,
+          coverImage: cover,
+          date: safeText(p?.date),
+          timestamp: safeTs,
+          featured: !!p?.featured,
+          featuredExcerpt: safeText(p?.featuredExcerpt),
+        };
+      })
+      .filter(p => !!p.id);
+  }
+
+  async function tryFetchJson(url){
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  }
+
+  async function loadPosts(){
+    clearError();
+
+    // Try a couple of URLs (GitHub Pages can be finicky if a file was renamed/moved)
+    const candidates = [
+      resolveUrl('posts.json'),
+      resolveUrl('./posts.json'),
+      // fallback (in case a previous filename is used)
+      resolveUrl('post.json'),
+      resolveUrl('./post.json'),
+    ];
+
+    let lastErr = null;
+
+    for (const u of candidates){
+      try{
+        const json = await tryFetchJson(u);
+        state.posts = normalizePosts(json);
+        applyFilter();
+        return;
+      } catch (e){
+        lastErr = e;
+      }
+    }
+
+    // Final attempt with cache-bust in case CDN is holding an older empty file
+    try{
+      const json = await tryFetchJson(cacheBust(resolveUrl('posts.json')));
+      state.posts = normalizePosts(json);
+      applyFilter();
+      return;
+    } catch (e){
+      lastErr = e;
+    }
+
+    state.posts = [];
+    state.filtered = [];
+    render();
+    showError(
+      `Could not load posts JSON.\\n\\nFix:\\n1) Ensure posts.json is next to index.html\\n2) Ensure it starts with [ and ends with ]\\n3) Check that you can open: ${resolveUrl('posts.json')}\\n\\nDetails: ${lastErr?.message || lastErr}`
+    );
+  }
+
+  function applyFilter(){
+    const input = el('searchInput');
+    const q = input ? input.value.trim().toLowerCase() : '';
+    let list = [...state.posts];
+
+    list.sort((a,b) => state.newestFirst ? (b.timestamp - a.timestamp) : (a.timestamp - b.timestamp));
+
+    if (q){
+      list = list.filter(p => {
+        const hay = (p.title + ' ' + p.content).toLowerCase();
+        return hay.includes(q);
+      });
+    }
+
+    state.filtered = list;
+    render();
+  }
+
+  function pickFeatured(){
+    const featured = state.filtered.find(p => p.featured) || state.posts.find(p => p.featured);
+    return featured || null;
+  }
+
+  function excerptFor(post){
+    if (!post) return '';
+    if (post.featuredExcerpt) return post.featuredExcerpt;
+
+    const { lead } = extractLeadAndRest(post.content);
+    if (lead) return lead;
+
+    const plain = stripMarkdown(post.content);
+    return plain.length > 180 ? (plain.slice(0, 180).trim() + '…') : plain;
+  }
+
+  function cardThumb(post){
+    const url = post.coverImage ? resolveUrl(post.coverImage) : '';
+    if (!url) return `<div class="thumbFallback" aria-hidden="true">TRIP</div>`;
+    return `<img class="thumb" src="${escapeHtml(cacheBust(url))}" alt="" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'" /><div class="thumbFallback" aria-hidden="true" style="display:none">TRIP</div>`;
+  }
+
+  function card(post){
+    const dateStr = formatDate(post);
+    const mins = estimateReadTime(post.content);
+    const ex = excerptFor(post);
+
+    return `
+      <div class="card">
+        ${cardThumb(post)}
+        <div class="info">
+          <h4>${escapeHtml(post.title)}</h4>
+          <div class="small">
+            ${dateStr ? `<span>${escapeHtml(dateStr)}</span>` : ''}
+            <span>•</span>
+            <span>${mins} min read</span>
+          </div>
+          ${ex ? `<p class="excerpt">${escapeHtml(ex)}</p>` : ''}
+        </div>
+        <div class="cta">
+          <button class="btn primary" onclick="openPostById('${escapeHtml(post.id)}')">Read</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function render(){
+    el('loadedPill').textContent = `${state.filtered.length} loaded`;
+
+    const featured = pickFeatured();
+    if (featured){
+      el('featuredMeta').textContent = `Featured • ${formatDate(featured) || ''}`.trim();
+      el('featuredSlot').innerHTML = card(featured);
+    } else {
+      el('featuredMeta').textContent = 'No featured post yet';
+      el('featuredSlot').innerHTML = '';
+    }
+
+    const latest = state.filtered.slice(0, 6);
+    el('latestMeta').textContent = `${state.filtered.length} posts • ${state.newestFirst ? 'Newest first' : 'Oldest first'}`;
+    el('latestSlot').innerHTML = latest.map(p => card(p)).join('');
+  }
+
+  function setView(view){
+    const list = el('listView');
+    const post = el('postView');
+    const isPost = view === 'post';
+    list.style.display = isPost ? 'none' : 'block';
+    post.style.display = isPost ? 'block' : 'none';
+  }
+
+  function openPostById(id){
+    const post = state.posts.find(p => p.id === id) || state.filtered.find(p => p.id === id);
+    if (!post) return;
+
+    const desiredHash = 'post=' + encodeURIComponent(post.id);
+    if ((window.location.hash || '').replace(/^#/, '') !== desiredHash) {
+      window.location.hash = desiredHash;
+    }
+
+    el('postTitle').textContent = post.title;
+    const dateStr = formatDate(post);
+    const mins = estimateReadTime(post.content);
+    el('postMeta').innerHTML = `${dateStr ? escapeHtml(dateStr) : ''}${dateStr ? ' • ' : ''}${mins} min read`;
+
+    const coverEl = el('postCover');
+    const coverImg = el('postCoverImg');
+    const coverUrl = post.coverImage ? resolveUrl(post.coverImage) : '';
+    if (coverUrl){
+      coverImg.src = cacheBust(coverUrl);
+      coverImg.alt = post.title;
+      coverEl.style.display = 'block';
+      coverImg.onerror = () => { coverEl.style.display = 'none'; };
+    } else {
+      coverEl.style.display = 'none';
+    }
+
+    const { lead, rest } = extractLeadAndRest(post.content);
+    const leadEl = el('postLead');
+    const leadText = lead || (post.featuredExcerpt ? stripMarkdown(post.featuredExcerpt) : '');
+    if (leadText){
+      leadEl.textContent = leadText;
+      leadEl.style.display = 'block';
+      el('postContent').innerHTML = lead ? mdToHtml(rest) : mdToHtml(post.content);
+    } else {
+      leadEl.style.display = 'none';
+      el('postContent').innerHTML = mdToHtml(post.content);
+    }
+
+    setView('post');
+
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
+  }
+
+  function goHome(){
+    window.location.hash = 'home';
+    setView('list');
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    });
+  }
+
+  function handleHash(){
+    const h = (window.location.hash || '').replace(/^#/, '');
+    if (!h || h === 'home') { setView('list'); return; }
+
+    if (h.startsWith('post=')){
+      const id = decodeURIComponent(h.slice(5));
+      openPostById(id);
+      return;
+    }
+
+    setView('list');
+  }
+
+  function pickRandomQuote(){
+    const q = state.quotes[Math.floor(Math.random() * state.quotes.length)];
+    el('quoteText').textContent = q.t;
+    el('quoteBy').textContent = '— ' + q.b;
+  }
+
+  // Wire up
+  el('homeBtn').addEventListener('click', goHome);
+  el('allBtn').addEventListener('click', () => {
+    setView('list');
+    requestAnimationFrame(() => {
+      document.querySelector('#featuredPanel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+  el('viewAllBtn').addEventListener('click', () => {
+    document.querySelector('#featuredPanel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  el('surpriseBtn').addEventListener('click', () => {
+    if (!state.filtered.length) return;
+    const p = state.filtered[Math.floor(Math.random() * state.filtered.length)];
+    openPostById(p.id);
+  });
+
+  el('reloadBtn').addEventListener('click', loadPosts);
+  el('clearBtn').addEventListener('click', () => {
+    el('searchInput').value = '';
+    applyFilter();
+  });
+
+  el('sortBtn').addEventListener('click', () => {
+    state.newestFirst = !state.newestFirst;
+    el('sortBtn').textContent = 'Sort: ' + (state.newestFirst ? 'Newest' : 'Oldest');
+    applyFilter();
+  });
+
+  el('searchInput').addEventListener('input', () => {
+    applyFilter();
+  });
+
+  el('backBtn').addEventListener('click', goHome);
+  el('copyBtn').addEventListener('click', async () => {
+    try{
+      await navigator.clipboard.writeText(window.location.href);
+      el('copyBtn').textContent = 'Copied!';
+      setTimeout(() => el('copyBtn').textContent = 'Copy link', 1200);
+    } catch {
+      el('copyBtn').textContent = 'Copy failed';
+      setTimeout(() => el('copyBtn').textContent = 'Copy link', 1200);
+    }
+  });
+
+  window.addEventListener('hashchange', handleHash);
+
+  // Init
+  pickRandomQuote();
+  loadPosts().then(() => handleHash());
 </script>
 </body>
 </html>
