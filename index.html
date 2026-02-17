@@ -700,22 +700,34 @@
 
   async function loadPosts(){
     clearError();
-    const url = cacheBust(resolveUrl('posts.json'));
 
-    try {
-      const res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json = await res.json();
-      state.posts = normalizePosts(json);
-      applyFilter();
-    } catch (e){
-      state.posts = [];
-      state.filtered = [];
-      render();
-      showError(
-`Could not load posts.json.\\n\\nFix:\\n1) Ensure posts.json is in the same folder as index.html\\n2) Ensure it is valid JSON (starts with [ and ends with ])\\n\\nDetails: ${e?.message || e}`
-      );
+    // Be forgiving: support both file names.
+    const candidates = ['posts.json', 'post.json'];
+    const tried = [];
+    let lastErr = null;
+
+    for (const name of candidates){
+      const url = cacheBust(resolveUrl(name));
+      tried.push(url);
+
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        state.posts = normalizePosts(json);
+        applyFilter();
+        return;
+      } catch (e){
+        lastErr = e;
+      }
     }
+
+    state.posts = [];
+    state.filtered = [];
+    render();
+    showError(
+`Could not load posts data.\n\nFix:\n1) Ensure posts.json (or post.json) is in the same folder as index.html\n2) Ensure it is valid JSON (starts with [ and ends with ])\n\nTried:\n- ${tried.join('\n- ')}\n\nDetails: ${lastErr?.message || lastErr}`
+    );
   }
 
   function applyFilter(){
