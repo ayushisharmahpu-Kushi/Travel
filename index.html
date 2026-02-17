@@ -215,20 +215,6 @@
       transform: translateY(-2px);
       box-shadow: 0 16px 40px rgba(11,19,36,.10);
     }
-    .thumb{
-      width:128px; height:84px;
-      border-radius: 16px;
-      border:1px solid rgba(11,19,36,.10);
-      background: linear-gradient(135deg, rgba(14,165,233,.12), rgba(34,197,94,.10));
-      overflow:hidden;
-      flex:0 0 auto;
-      display:flex; align-items:center; justify-content:center;
-      color: rgba(11,19,36,.45);
-      font-weight:950;
-      letter-spacing:.3px;
-      user-select:none;
-    }
-    .thumb img{width:100%; height:100%; object-fit:cover; display:block}
     .postCard h3{margin:0 0 6px; font-size:16px; line-height:1.25}
     .postMeta{display:flex; gap:10px; flex-wrap:wrap; font-size:12px; color:var(--muted2)}
     .excerpt{margin-top:8px; font-size:13px; color: rgba(11,19,36,.80); line-height:1.55}
@@ -266,15 +252,6 @@
     .content h4{margin:18px 0 8px; font-size:16px}
     .content ul,.content ol{margin:8px 0 14px 20px}
     .content li{margin:6px 0}
-    .content img{
-      max-width:100%;
-      height:auto;
-      border-radius: 18px;
-      border:1px solid rgba(11,19,36,.12);
-      display:block;
-      margin:12px 0;
-      background: rgba(11,19,36,.02);
-    }
     .content pre{
       border:1px solid rgba(11,19,36,.10);
       background: rgba(11,19,36,.03);
@@ -347,8 +324,6 @@
           <h1 class="heroTitle" id="heroTitle">Discover places worth remembering.</h1>
           <p class="heroDesc" id="heroDesc">
             A simple travel blog — view-only for visitors. New posts are loaded from <span class="pill">posts.json</span>.
-            Upload images to <span class="pill">assets/images/</span> and reference them inside your post content like
-            <span class="pill">![Alt](assets/images/photo.jpg)</span>.
           </p>
 
           <div class="heroActions">
@@ -492,13 +467,6 @@
       return `${mins} min read`;
     }
 
-    function firstImageUrl(content){
-      const text = String(content || "");
-      const re = /!\[[^\]]*\]\(([^)]+)\)/;
-      const m = text.match(re);
-      return m ? m[1].trim() : null;
-    }
-
     function getExcerpt(content){
       const cleaned = String(content || "").replaceAll(/\s+/g, " ").trim();
       return cleaned.length > 190 ? cleaned.slice(0, 190) + "…" : cleaned;
@@ -526,7 +494,7 @@
           id, title, content,
           date: String(p.date || "").trim(),
           timestamp: Number(p.timestamp || 0),
-          coverImage: typeof p.coverImage === "string" ? p.coverImage : ""
+          featured: Boolean(p.featured)
         });
       }
       return out;
@@ -567,9 +535,7 @@
         for (const m of s.matchAll(re)){
           const idx = m.index ?? 0;
           html += escapeHtml(s.slice(last, idx));
-          const alt = escapeAttr(m[1] || "");
-          const url = escapeAttr((m[2] || "").trim());
-          html += `<img alt="${alt}" src="${url}" loading="lazy" />`;
+          // Images removed - skip the markdown image syntax
           last = idx + m[0].length;
         }
         html += escapeHtml(s.slice(last));
@@ -664,13 +630,8 @@
       el.setAttribute("role", "button");
       el.dataset.postId = post.id;
 
-      const thumbUrl = post.coverImage || firstImageUrl(post.content);
-
       el.innerHTML = `
-        <div class="thumb" aria-hidden="true">
-          ${thumbUrl ? `<img src="${escapeAttr(thumbUrl)}" alt="" loading="lazy" />` : "TRIP"}
-        </div>
-        <div style="min-width:0">
+        <div style="min-width:0; flex:1">
           <h3 title="${escapeAttr(post.title)}">${escapeHtml(post.title)}</h3>
           <div class="postMeta">
             ${formatDate(post) ? `<span>${escapeHtml(formatDate(post))}</span>` : ""}
@@ -706,11 +667,11 @@
       $("latestCount").textContent = `${state.posts.length} post${state.posts.length === 1 ? "" : "s"}`;
       $("statusPill").textContent = state.loaded ? `${state.posts.length} loaded` : "Loading…";
 
-      // Featured = first post in sorted list
-      if (all.length > 0){
-        const p0 = all[0];
-        featured.appendChild(makePostCard(p0));
-        $("featuredMeta").textContent = "Featured • " + (formatDate(p0) || "Newest");
+      // Featured = post with featured:true, or first post if none marked
+      const featuredPost = all.find(p => p.featured === true) || all[0];
+      if (featuredPost){
+        featured.appendChild(makePostCard(featuredPost));
+        $("featuredMeta").textContent = "Featured • " + (formatDate(featuredPost) || "Newest");
       } else {
         const empty = document.createElement("div");
         empty.className = "postCard";
