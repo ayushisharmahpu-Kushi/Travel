@@ -31,16 +31,44 @@
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
       color:var(--text);
-      background:
-        radial-gradient(1100px 560px at 20% 10%, rgba(59,130,246,.18), transparent 60%),
-        radial-gradient(900px 520px at 85% 15%, rgba(34,197,94,.16), transparent 60%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
+      background: linear-gradient(135deg, #f8fbff, #fff7f0);
       overflow-x:hidden;
+      position:relative;
+    }
+
+    /* Photo-style travel background.
+       Put your background image at: assets/images/travel-bg.jpg */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:url("assets/images/travel-bg.jpg") center/cover no-repeat;
+      opacity:.28;
+      filter:saturate(1.05) contrast(1.05);
+      transform:scale(1.06);
+      animation:photoDrift 22s ease-in-out infinite alternate;
+      z-index:-2;
+      pointer-events:none;
+    }
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(900px 520px at 20% 10%, rgba(255,255,255,.78), rgba(255,255,255,0) 60%),
+        radial-gradient(900px 520px at 85% 0%, rgba(255,255,255,.58), rgba(255,255,255,0) 55%),
+        linear-gradient(135deg, rgba(248,251,255,.86), rgba(255,247,240,.86));
+      z-index:-1;
+      pointer-events:none;
+    }
+    @keyframes photoDrift{
+      from{ transform:scale(1.06) translate3d(-1%, -1%, 0); }
+      to  { transform:scale(1.12) translate3d( 1%,  1%, 0); }
     }
 
     a{color:inherit}
 
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 70px;}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 70px; position:relative; z-index:1;}
 
     /* Top bar */
     .top{
@@ -94,7 +122,7 @@
 
     .heroGrid{display:grid; grid-template-columns: 1.3fr .9fr; gap:16px; align-items:stretch;}
 
-    .hero h2{margin:0 0 6px; font-size:44px; letter-spacing:-.02em}
+    .hero h2{margin:0 0 6px; font-size:32px; letter-spacing:-.02em; line-height:1.12}
     .hero .sub{margin:0 0 14px; color:var(--muted); font-size:15px}
 
     .heroActions{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
@@ -290,7 +318,7 @@
     /* Responsive */
     @media (max-width: 980px){
       .heroGrid{grid-template-columns:1fr}
-      .hero h2{font-size:36px}
+      .hero h2{font-size:28px}
       .grid{grid-template-columns:1fr}
       .thumb,.thumbFallback{width:96px; height:72px; border-radius:16px}
       .postTitle{font-size:26px}
@@ -300,7 +328,7 @@
     @media (max-width: 520px){
       .wrap{padding:18px 12px 56px}
       .hero{padding:16px}
-      .hero h2{font-size:30px}
+      .hero h2{font-size:24px}
       .top{padding:12px 12px}
       .btn{padding:9px 12px}
       .panel{padding:14px}
@@ -323,47 +351,11 @@
     }
   
 
-    /* Animated travel background (no extra image files needed) */
-    body{ position:relative; }
-    .wrap{ position:relative; z-index:1; }
-
-    .bg-anim{
-      position:fixed; inset:0;
-      z-index:0;
-      pointer-events:none;
-      overflow:hidden;
-    }
-    .bg-layer{
-      position:absolute; inset:-18%;
-      background-repeat:repeat;
-      background-size:900px 600px;
-      opacity:.13;
-      mix-blend-mode: multiply;
-      transform: translateZ(0);
-    }
-    .bg-layer.l1{ background-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22900%22%20height=%22600%22%20viewBox=%220%200%20900%20600%22%3E%20%3Cdefs%3E%20%3Cpattern%20id=%22topo%22%20width=%22300%22%20height=%22300%22%20patternUnits=%22userSpaceOnUse%22%3E%20%3Cpath%20d=%22M0%20210%20C%2080%20170%20160%20250%20300%20210%22%20fill=%22none%22%20stroke=%22rgb(15,23,42)%22%20stroke-opacity=%220.10%22%20stroke-width=%222%22/%3E%20%3Cpath%20d=%22M0%20170%20C%2090%20130%20170%20210%20300%20170%22%20fill=%22none%22%20stroke=%22rgb(15,23,42)%22%20stroke-opacity=%220.08%22%20stroke-width=%222%22/%3E%20%3Cpath%20d=%22M0%20250%20C%2070%20220%20180%20300%20300%20250%22%20fill=%22none%22%20stroke=%22rgb(15,23,42)%22%20stroke-opacity=%220.07%22%20stroke-width=%222%22/%3E%20%3Ccircle%20cx=%2270%22%20cy=%2270%22%20r=%2226%22%20fill=%22none%22%20stroke=%22rgb(59,130,246)%22%20stroke-opacity=%220.12%22%20stroke-width=%222%22/%3E%20%3Cpath%20d=%22M70%2044%20L70%2096%20M44%2070%20L96%2070%22%20stroke=%22rgb(59,130,246)%22%20stroke-opacity=%220.12%22%20stroke-width=%222%22/%3E%20%3Cpath%20d=%22M210%2070%20L255%20110%20L165%20110%20Z%22%20fill=%22none%22%20stroke=%22rgb(34,197,94)%22%20stroke-opacity=%220.12%22%20stroke-width=%222%22/%3E%20%3Cpath%20d=%22M198%20110%20L210%2088%20L222%20110%22%20fill=%22none%22%20stroke=%22rgb(34,197,94)%22%20stroke-opacity=%220.12%22%20stroke-width=%222%22/%3E%20%3C/pattern%3E%20%3C/defs%3E%20%3Crect%20width=%22900%22%20height=%22600%22%20fill=%22url(%23topo)%22/%3E%20%3C/svg%3E"); animation: drift1 70s linear infinite; opacity:.10; }
-    .bg-layer.l2{ background-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22900%22%20height=%22600%22%20viewBox=%220%200%20900%20600%22%3E%20%3Cdefs%3E%20%3Cpattern%20id=%22routes%22%20width=%22360%22%20height=%22360%22%20patternUnits=%22userSpaceOnUse%22%3E%20%3Cpath%20d=%22M30%20260%20C%20120%20160%20240%20320%20330%20220%22%20fill=%22none%22%20stroke=%22rgb(59,130,246)%22%20stroke-opacity=%220.10%22%20stroke-width=%222%22%20stroke-dasharray=%224%208%22%20stroke-linecap=%22round%22/%3E%20%3Ccircle%20cx=%2230%22%20cy=%22260%22%20r=%225%22%20fill=%22rgb(59,130,246)%22%20fill-opacity=%220.16%22/%3E%20%3Ccircle%20cx=%22330%22%20cy=%22220%22%20r=%225%22%20fill=%22rgb(34,197,94)%22%20fill-opacity=%220.16%22/%3E%20%3Cpath%20d=%22M175%2090%20C%20210%2040%20300%2080%20330%2030%22%20fill=%22none%22%20stroke=%22rgb(15,23,42)%22%20stroke-opacity=%220.08%22%20stroke-width=%222%22%20stroke-dasharray=%222%2010%22%20stroke-linecap=%22round%22/%3E%20%3Ccircle%20cx=%22175%22%20cy=%2290%22%20r=%224%22%20fill=%22rgb(15,23,42)%22%20fill-opacity=%220.10%22/%3E%20%3Ccircle%20cx=%22330%22%20cy=%2230%22%20r=%224%22%20fill=%22rgb(15,23,42)%22%20fill-opacity=%220.10%22/%3E%20%3Cpath%20d=%22M210%20200%20l18%20-10%20l-7%2020%20l-11%20-10%20Z%22%20fill=%22rgb(15,23,42)%22%20fill-opacity=%220.10%22/%3E%20%3Cpath%20d=%22M210%20200%20l55%2025%22%20stroke=%22rgb(15,23,42)%22%20stroke-opacity=%220.10%22%20stroke-width=%222%22%20stroke-linecap=%22round%22/%3E%20%3C/pattern%3E%20%3C/defs%3E%20%3Crect%20width=%22900%22%20height=%22600%22%20fill=%22url(%23routes)%22/%3E%20%3C/svg%3E"); animation: drift2 85s linear infinite; opacity:.12; }
-    .bg-layer.l3{ background-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22900%22%20height=%22600%22%20viewBox=%220%200%20900%20600%22%3E%20%3Cdefs%3E%20%3Cpattern%20id=%22stamps%22%20width=%22320%22%20height=%22320%22%20patternUnits=%22userSpaceOnUse%22%3E%20%3Crect%20x=%2235%22%20y=%2235%22%20width=%22110%22%20height=%22110%22%20rx=%2216%22%20fill=%22none%22%20stroke=%22rgb(15,23,42)%22%20stroke-opacity=%220.08%22%20stroke-width=%222%22%20stroke-dasharray=%228%206%22/%3E%20%3Cpath%20d=%22M60%20105%20L80%2080%20L100%20105%20Z%22%20fill=%22rgb(34,197,94)%22%20fill-opacity=%220.10%22/%3E%20%3Ccircle%20cx=%22115%22%20cy=%2270%22%20r=%2210%22%20fill=%22rgb(59,130,246)%22%20fill-opacity=%220.10%22/%3E%20%3Cpath%20d=%22M200%2060%20a40%2040%200%201%200%201%200%22%20fill=%22none%22%20stroke=%22rgb(59,130,246)%22%20stroke-opacity=%220.10%22%20stroke-width=%222%22/%3E%20%3Cpath%20d=%22M200%2060%20a24%2024%200%201%200%201%200%22%20fill=%22none%22%20stroke=%22rgb(34,197,94)%22%20stroke-opacity=%220.10%22%20stroke-width=%222%22/%3E%20%3Cpath%20d=%22M170%20210%20C190%20190%20220%20235%20250%20210%22%20fill=%22none%22%20stroke=%22rgb(15,23,42)%22%20stroke-opacity=%220.07%22%20stroke-width=%222%22/%3E%20%3Cpath%20d=%22M160%20240%20C190%20215%20225%20275%20260%20240%22%20fill=%22none%22%20stroke=%22rgb(15,23,42)%22%20stroke-opacity=%220.06%22%20stroke-width=%222%22/%3E%20%3Ccircle%20cx=%22170%22%20cy=%22210%22%20r=%223%22%20fill=%22rgb(15,23,42)%22%20fill-opacity=%220.08%22/%3E%20%3Ccircle%20cx=%22250%22%20cy=%22210%22%20r=%223%22%20fill=%22rgb(15,23,42)%22%20fill-opacity=%220.08%22/%3E%20%3C/pattern%3E%20%3C/defs%3E%20%3Crect%20width=%22900%22%20height=%22600%22%20fill=%22url(%23stamps)%22/%3E%20%3C/svg%3E"); animation: drift3 95s linear infinite; opacity:.09; }
-
-    @keyframes drift1 {
-      from { background-position: 0px 0px; transform: translate3d(0,0,0) scale(1); }
-      to   { background-position: 900px 520px; transform: translate3d(0,0,0) scale(1); }
-    }
-    @keyframes drift2 {
-      from { background-position: 900px 0px; }
-      to   { background-position: 0px 720px; }
-    }
-    @keyframes drift3 {
-      from { background-position: 0px 600px; }
-      to   { background-position: 1100px 0px; }
-    }
-
-  </style>
+    /* 
+</style>
 </head>
 <body>
-  <div class="bg-anim" aria-hidden="true">
-    <div class="bg-layer l1"></div>
-    <div class="bg-layer l2"></div>
+<div class="bg-layer l2"></div>
     <div class="bg-layer l3"></div>
   </div>
 
