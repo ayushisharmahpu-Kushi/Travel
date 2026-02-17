@@ -311,6 +311,15 @@
       .postTitle{font-size:22px}
       .postCover img{max-height:200px}
       .postLead{font-size:15px}
+      /* Mobile: prevent ultra-narrow excerpts by moving CTA to its own row */
+      .card{flex-wrap:wrap}
+      .card .thumb{width:72px; height:72px; border-radius:16px}
+      .card .thumb img{width:100%; height:100%; object-fit:cover}
+      .card .info{flex:1 1 0; min-width:0}
+      .card .cta{width:100%; margin-left:0; display:flex; justify-content:flex-end}
+      .card .cta .btn{min-width:110px}
+      .excerpt{white-space:normal; word-break:break-word; hyphens:auto}
+
     }
   
 
