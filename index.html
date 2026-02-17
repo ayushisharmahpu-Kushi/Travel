@@ -26,7 +26,7 @@
 
       /* Background image (JS will set an absolute path so it works on GitHub Pages subfolders) */
       --bg-image: url("assets/images/travel-bg.jpg");
-      --bg-opacity: .28;
+      --bg-opacity:.36;
     }
 
     *{box-sizing:border-box}
@@ -54,7 +54,7 @@
       background-size:cover;
       background-repeat:no-repeat;
       opacity:var(--bg-opacity);
-      filter:saturate(1.05) contrast(1.05);
+      filter:saturate(1.05) contrast(1.05) brightness(1.08);
       transform:scale(1.06);
       animation:photoDrift 22s ease-in-out infinite alternate;
       z-index:-2;
@@ -65,9 +65,9 @@
       position:fixed;
       inset:0;
       background:
-        radial-gradient(900px 520px at 20% 10%, rgba(255,255,255,.78), rgba(255,255,255,0) 60%),
-        radial-gradient(900px 520px at 85% 0%, rgba(255,255,255,.58), rgba(255,255,255,0) 55%),
-        linear-gradient(135deg, rgba(248,251,255,.86), rgba(255,247,240,.86));
+        radial-gradient(900px 520px at 20% 10%, rgba(255,255,255,.62), rgba(255,255,255,0) 60%),
+        radial-gradient(900px 520px at 85% 0%, rgba(255,255,255,.46), rgba(255,255,255,0) 55%),
+        linear-gradient(135deg, rgba(248,251,255,.74), rgba(255,247,240,.74));
       z-index:-1;
       pointer-events:none;
     }
@@ -166,7 +166,7 @@
 
     .chip{
       border:1px solid var(--border);
-      background:rgba(255,255,255,.78);
+      background:rgba(255,255,255,.62);
       padding:10px 14px;
       border-radius:999px;
       font-weight:700;
@@ -245,7 +245,7 @@
       margin-top:16px;
       border:1px solid var(--border);
       border-radius:var(--radius);
-      background:rgba(255,255,255,.78);
+      background:rgba(255,255,255,.62);
       box-shadow: var(--shadow);
       overflow:hidden;
     }
@@ -468,7 +468,7 @@
 
     // If the image fails to load, hide it (keep gradients)
     const img = new Image();
-    img.onload = () => document.documentElement.style.setProperty('--bg-opacity', '.28');
+    img.onload = () => document.documentElement.style.setProperty('--bg-opacity', '.36');
     img.onerror = () => document.documentElement.style.setProperty('--bg-opacity', '0');
     img.src = bg + (bg.includes('?') ? '&' : '?') + 'v=' + Date.now();
   })();
@@ -683,7 +683,7 @@
         const ts = Number(p?.timestamp);
         const safeTs = Number.isFinite(ts) ? ts : Date.now();
         const content = safeText(p?.content);
-        const cover = safeText(p?.coverImage) || extractFirstImage(content);
+        const cover = (safeText(p?.coverImage || p?.cover_image) || extractFirstImage(content)).trim();
         return {
           id: safeText(p?.id) || ('post-' + safeTs),
           title: safeText(p?.title) || 'Untitled',
@@ -754,7 +754,7 @@
   function cardThumb(post){
     const url = post.coverImage ? resolveUrl(post.coverImage) : '';
     if (!url) return `<div class="thumbFallback" aria-hidden="true">TRIP</div>`;
-    return `<img class="thumb" src="${escapeHtml(cacheBust(url))}" alt="" loading="lazy"
+    return `<img class="thumb" src="${escapeHtml(url)}" alt="" loading="lazy"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'" />
             <div class="thumbFallback" aria-hidden="true" style="display:none">TRIP</div>`;
   }
@@ -826,7 +826,7 @@
     const coverImg = el('postCoverImg');
     const coverUrl = post.coverImage ? resolveUrl(post.coverImage) : '';
     if (coverUrl){
-      coverImg.src = cacheBust(coverUrl);
+      coverImg.src = coverUrl;
       coverImg.alt = post.title;
       coverEl.style.display = 'block';
       coverImg.onerror = () => { coverEl.style.display = 'none'; };
