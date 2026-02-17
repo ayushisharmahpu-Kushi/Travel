@@ -400,9 +400,9 @@
           id, title, content,
           date: String(p.date || "").trim(),
           timestamp: Number(p.timestamp || 0),
-          coverImage: typeof p.coverImage === "string" ? p.coverImage : "",
-          excerpt: typeof p.excerpt === "string" ? p.excerpt : "",
-          featuredExcerpt: typeof p.featuredExcerpt === "string" ? p.featuredExcerpt : "",
+          coverImage: typeof p.coverImage === "string" ? p.coverImage.trim() : "",
+          excerpt: typeof p.excerpt === "string" ? p.excerpt.trim() : "",
+          featuredExcerpt: typeof p.featuredExcerpt === "string" ? p.featuredExcerpt.trim() : "",
           featured: Boolean(p.featured)
         });
       }
@@ -443,7 +443,10 @@
           const idx = m.index ?? 0;
           html += escapeHtml(s.slice(last, idx));
           const alt = escapeAttr(m[1] || "");
-          const url = escapeAttr((m[2] || "").trim());
+          let urlRaw = (m[2] || "").trim();
+          // Cache-bust relative images to avoid stale 404s on GitHub Pages.
+          if (urlRaw && !/^https?:\/\//i.test(urlRaw) && !urlRaw.includes("?")) urlRaw = `${urlRaw}?v=${Date.now()}`;
+          const url = escapeAttr(urlRaw);
           html += `<img alt="${alt}" src="${url}" loading="lazy" />`;
           last = idx + m[0].length;
         }
@@ -533,12 +536,13 @@
       el.tabIndex = 0;
       el.setAttribute("role", "button");
 
-      const thumbUrl = post.coverImage || firstImageUrl(post.content);
+      const thumbUrlRaw = post.coverImage || firstImageUrl(post.content);
+      const thumbUrl = thumbUrlRaw ? cacheBust(thumbUrlRaw, post) : null;
       const excerpt = getExcerpt(post, mode);
 
       el.innerHTML = `
         <div class="thumb" aria-hidden="true">
-          ${thumbUrl ? `<img src="${escapeAttr(thumbUrl)}" alt="" loading="lazy" />` : "TRIP"}
+          ${thumbUrl ? `<img src="${escapeAttr(thumbUrl)}" alt="" loading="lazy" onerror="this.closest(\'div.thumb\').textContent=\'TRIP\'; this.remove();" />` : "TRIP"}
         </div>
         <div style="min-width:0">
           <h3 title="${escapeAttr(post.title)}">${escapeHtml(post.title)}</h3>
