@@ -1,1180 +1,1317 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Itinerary Index</title>
+  <meta name="description" content="Travel destinations, stays, food, and tips." />
   
-  <!-- Primary Meta Tags -->
-  <title>Itinerary Index — India Travel Guides (Destinations, Hotels, Food)</title>
-  <link rel="canonical" href="https://ayushisharmahpu-kushi.github.io/Travel/">
-  <meta name="title" content="Wanderlust ✨ - India Travel Blog">
-  <meta name="description" content="Practical India travel guides with destinations, stays, local food, and travel tips.">
-  <meta name="keywords" content="India travel blog, tourist places India, best hotels India, restaurants India, Indian food, local dishes, travel guides India, travel tips">
-  <meta name="author" content="My Blog">
-  <meta name="robots" content="index, follow">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ayushisharmahpu-kushi.github.io/Travel/">
-  <meta property="og:title" content="Itinerary Index — India Travel Guides">
-  <meta property="og:description" content="Practical destination guides with hotels, local food, and travel tips.">
-  <meta property="og:image" content="https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Itinerary Index — India travel guides">
-  
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://ayushisharmahpu-kushi.github.io/Travel/">
-  <meta property="twitter:title" content="Itinerary Index — India Travel Guides">
-  <meta property="twitter:description" content="Practical destination guides with hotels, local food, and travel tips.">
-  <meta property="twitter:image" content="https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
-  
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+  <!-- SEO + Social -->
+  <link rel="canonical" href="https://ayushisharmahpu-kushi.github.io/Travel/" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#f8fbff" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Itinerary Index" />
+  <meta property="og:title" content="Itinerary Index — India Travel Guides, Hotels & Local Food" />
+  <meta property="og:description" content="Practical destination guides with hotels, local food, and travel tips." />
+  <meta property="og:url" content="https://ayushisharmahpu-kushi.github.io/Travel/" />
+  <meta property="og:image" content="https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Itinerary Index — India Travel Guides, Hotels & Local Food" />
+  <meta name="twitter:description" content="Practical destination guides with hotels, local food, and travel tips." />
+  <meta name="twitter:image" content="https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Itinerary Index",
+    "url": "https://ayushisharmahpu-kushi.github.io/Travel/",
+    "description": "Practical destination guides with hotels, local food, and travel tips.",
+    "inLanguage": "en"
+  }
+  </script>
+
+<style>
+    :root{
+      --bg1:#f8fbff;
+      --bg2:#fff7f0;
+      --card:#ffffffcc;
+      --cardSolid:#fff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --border:#e5e7eb;
+      --shadow:0 14px 45px rgba(15,23,42,.10);
+      --shadowSoft:0 12px 34px rgba(15,23,42,.08);
+      --pill:#e6f4ff;
+      --pill2:#e9fff1;
+      --accent:#22c55e;
+      --accent2:#3b82f6;
+      --radius:24px;
+      --radiusSm:16px;
+      --max:1120px;
     }
 
-    :root {
-      /* Dark theme colors */
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #14141f;
-      --bg-tertiary: #1c1c2e;
-      --bg-card: rgba(255, 255, 255, 0.04);
-      --bg-card-hover: rgba(255, 255, 255, 0.08);
-      
-      /* Text colors */
-      --text-primary: #ffffff;
-      --text-secondary: #a8a8b8;
-      --text-muted: #6b6b7f;
-      
-      /* Accent colors */
-      --accent-primary: #6366f1;
-      --accent-secondary: #8b5cf6;
-      --accent-success: #10b981;
-      --accent-danger: #ef4444;
-      
-      /* Gradients */
-      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      
-      /* Effects */
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
-      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
-      --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.5);
-      
-      /* Border radius */
-      --radius-sm: 8px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
-      
-      /* Transitions */
-      --transition-fast: 0.2s ease;
-      --transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;
+      isolation:isolate;
+      background:transparent;
+    }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: linear-gradient(135deg, #f8fbff, #fff7f0);
+      overflow-x:hidden;
+      position:relative;
     }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      overflow-x: hidden;
-      min-height: 100vh;
+    /* Photo-style travel background.
+       Put your background image at: assets/images/og-card.jpg */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:url("assets/images/og-card.jpg") center/cover no-repeat;
+      /* brighter + more visible */
+      opacity:.50;
+      filter:saturate(1.08) contrast(1.06) brightness(1.10);
+      transform:scale(1.06);
+      animation:photoDrift 22s ease-in-out infinite alternate;
+      z-index:-2;
+      pointer-events:none;
+    }
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      /* slightly lighter overlay so the photo shows more */
+      background:
+        radial-gradient(900px 520px at 20% 10%, rgba(255,255,255,.62), rgba(255,255,255,0) 60%),
+        radial-gradient(900px 520px at 85% 0%, rgba(255,255,255,.50), rgba(255,255,255,0) 55%),
+        linear-gradient(135deg, rgba(248,251,255,.74), rgba(255,247,240,.74));
+      z-index:-1;
+      pointer-events:none;
+    }
+    @keyframes photoDrift{
+      from{ transform:scale(1.06) translate3d(-1%, -1%, 0); }
+      to  { transform:scale(1.12) translate3d( 1%,  1%, 0); }
     }
 
-    /* Animated background */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(245, 87, 108, 0.05) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 0;
-      animation: backgroundPulse 15s ease infinite;
-    }
+    a{color:inherit}
 
-    @keyframes backgroundPulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 70px; position:relative; z-index:1;}
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Header Styles */
-    header {
-      backdrop-filter: blur(20px);
-      background: rgba(10, 10, 15, 0.8);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      animation: slideDown 0.6s ease-out;
-    }
-
-    @keyframes slideDown {
-      from {
-        transform: translateY(-100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.25rem 0;
-      gap: 2rem;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.75rem;
-      font-weight: 900;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: -0.02em;
-      cursor: pointer;
-      transition: transform var(--transition-medium);
-    }
-
-    .logo:hover {
-      transform: scale(1.05);
-    }
-
-    .nav-tabs {
-      display: flex;
-      gap: 0.5rem;
-      background: var(--bg-card);
-      padding: 0.5rem;
-      border-radius: var(--radius-md);
+    /* Top bar */
+    .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:rgba(255,255,255,.7);
       backdrop-filter: blur(10px);
+      box-shadow: var(--shadowSoft);
     }
 
-    .nav-tab {
-      padding: 0.75rem 1.75rem;
-      background: transparent;
-      border: none;
-      color: var(--text-secondary);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all var(--transition-medium);
-      border-radius: var(--radius-sm);
-      position: relative;
-      white-space: nowrap;
+    .brand{display:flex; align-items:center; gap:10px; min-width:0;}
+    .logo{
+      width:38px; height:38px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(59,130,246,.28), rgba(34,197,94,.22));
+      display:grid; place-items:center;
+      border:1px solid rgba(15,23,42,.08);
+      flex:0 0 auto;
     }
+    .logo span{font-size:18px}
+    .brand h1{font-size:16px; margin:0; line-height:1.1}
+    .brand p{margin:0; font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 
-    .nav-tab:hover:not(.active) {
-      color: var(--text-primary);
-      background: rgba(255, 255, 255, 0.05);
+    .nav{display:flex; gap:8px; flex:0 0 auto;}
+    .btn{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.75);
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:600;
+      cursor:pointer;
+      transition:transform .06s ease, background .2s ease;
+      white-space:nowrap;
     }
+    .btn:hover{transform: translateY(-1px)}
+    .btn.primary{background:rgba(59,130,246,.15); border-color:rgba(59,130,246,.35)}
+    .btn.green{background:rgba(34,197,94,.15); border-color:rgba(34,197,94,.35)}
 
-    .nav-tab.active {
-      background: var(--gradient-primary);
-      color: white;
-      box-shadow: var(--shadow-glow);
-    }
-
-    /* Main Content */
-    main {
-      padding: 3rem 0;
-      min-height: calc(100vh - 200px);
-    }
-
-    .section {
-      display: none;
-      animation: fadeIn 0.5s ease-out;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      padding: 4rem 0;
-      margin-bottom: 3rem;
-    }
-
-    .hero h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.5rem;
-      font-weight: 900;
-      margin-bottom: 1rem;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.2;
-    }
-
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto 2rem;
-    }
-
-    .cta-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1rem 2rem;
-      background: var(--gradient-primary);
-      color: white;
-      border: none;
-      border-radius: var(--radius-md);
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all var(--transition-medium);
-      box-shadow: var(--shadow-md);
-    }
-
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-glow);
-    }
-
-    /* Editor Layout */
-    .editor-layout {
-      display: grid;
-      grid-template-columns: 1fr 400px;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .editor-main,
-    .editor-sidebar {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .editor-main h3,
-    .editor-sidebar h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-
-    .form-input,
-    .form-textarea {
-      width: 100%;
-      padding: 0.875rem 1rem;
-      background: var(--bg-secondary);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
-      transition: all var(--transition-medium);
-    }
-
-    .form-input:focus,
-    .form-textarea:focus {
-      outline: none;
-      border-color: var(--accent-primary);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-    }
-
-    .form-textarea {
-      min-height: 400px;
-      resize: vertical;
-      line-height: 1.7;
-    }
-
-    .char-count {
-      text-align: right;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 0.5rem;
-    }
-
-    .btn-primary,
-    .btn-secondary {
-      width: 100%;
-      padding: 1rem;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all var(--transition-medium);
-      margin-bottom: 0.75rem;
-    }
-
-    .btn-primary {
-      background: var(--gradient-primary);
-      color: white;
-      box-shadow: var(--shadow-md);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-glow);
-    }
-
-    .btn-secondary {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .btn-secondary:hover {
-      background: var(--bg-card-hover);
-    }
-
-    /* Posts Grid */
-    .posts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .post-card {
-      background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      cursor: pointer;
-      transition: all var(--transition-medium);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .post-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--gradient-primary);
-      transform: scaleX(0);
-      transition: transform var(--transition-medium);
-    }
-
-    .post-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent-primary);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .post-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .post-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.75rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .post-meta {
-      display: flex;
-      gap: 1.5rem;
-      margin-bottom: 1rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .post-meta span {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .post-excerpt {
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .post-actions {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .action-btn {
-      padding: 0.5rem 1rem;
-      background: var(--bg-secondary);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius-sm);
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-    }
-
-    .action-btn:hover {
-      background: var(--bg-card-hover);
-      color: var(--text-primary);
-    }
-
-    .action-btn.delete {
-      color: var(--accent-danger);
-    }
-
-    .action-btn.delete:hover {
-      background: rgba(239, 68, 68, 0.1);
-      border-color: var(--accent-danger);
-    }
-
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
+    /* Hero */
+    .hero{
+      margin-top:18px;
+      padding:22px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.62);
       backdrop-filter: blur(10px);
-      z-index: 1000;
-      padding: 2rem;
-      overflow-y: auto;
+      box-shadow: var(--shadow);
     }
 
-    .modal.active {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: fadeIn 0.3s ease;
+    .heroGrid{display:grid; grid-template-columns: 1.3fr .9fr; gap:16px; align-items:stretch;}
+
+    .hero h2{margin:0 0 6px; font-size:32px; letter-spacing:-.02em; line-height:1.12}
+    .hero .sub{margin:0 0 14px; color:var(--muted); font-size:15px}
+
+    .heroActions{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+    .statPill{padding:9px 12px; border-radius:999px; border:1px solid var(--border); background:rgba(255,255,255,.7); font-weight:600; color:var(--muted); font-size:13px}
+
+    .searchRow{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; align-items:center}
+    .search{
+      flex: 1 1 320px;
+      display:flex; align-items:center; gap:10px;
+      padding:11px 14px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:rgba(255,255,255,.8);
+    }
+    .search input{border:none; outline:none; background:transparent; width:100%; font-size:14px}
+
+    .quote{
+      border:1px solid rgba(34,197,94,.25);
+      background: rgba(34,197,94,.10);
+      border-radius:var(--radius);
+      padding:18px 18px 16px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:8px;
+      min-height:150px;
+    }
+    .quote .kicker{letter-spacing:.18em; font-size:12px; font-weight:800; color:rgba(15,23,42,.55)}
+    .quote .text{font-size:20px; margin:0; font-weight:800; line-height:1.25}
+    .quote .by{margin:0; color:var(--muted); font-weight:700}
+
+    .toolbar{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;
+      align-items:center; justify-content:flex-start;
     }
 
-    .modal-content {
-      background: var(--bg-secondary);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius-lg);
-      max-width: 800px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: var(--shadow-lg);
-      animation: slideUp 0.3s ease;
+    .chip{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.78);
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
     }
 
-    @keyframes slideUp {
-      from {
-        transform: translateY(50px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+    /* Sections */
+    .grid{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
     }
 
-    .modal-header {
-      padding: 2rem 2rem 1.5rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
+    .panel{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.70);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadowSoft);
+      padding:18px;
+      min-height:200px;
+    }
+    .panel h3{margin:0 0 6px; font-size:20px}
+    .panel .meta{color:var(--muted); font-size:13px; display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+
+    /* Cards */
+    .card{
+      border:1px solid rgba(15,23,42,.08);
+      background:rgba(255,255,255,.85);
+      border-radius:var(--radius);
+      box-shadow: 0 10px 30px rgba(15,23,42,.06);
+      padding:16px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      margin-top:14px;
+      overflow:hidden;
+    }
+    .thumb{
+      width:110px; height:82px;
+      border-radius:18px;
+      border:1px solid rgba(15,23,42,.10);
+      background: linear-gradient(135deg, rgba(59,130,246,.10), rgba(34,197,94,.10));
+      flex:0 0 auto;
+      display:block;
+      object-fit:cover;
+    }
+    .thumbFallback{
+      width:110px; height:82px;
+      border-radius:18px;
+      border:1px solid rgba(15,23,42,.10);
+      background: linear-gradient(135deg, rgba(59,130,246,.10), rgba(34,197,94,.10));
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      color:rgba(15,23,42,.45);
+      font-weight:900;
+      letter-spacing:.1em;
     }
 
-    .modal-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 700;
-      flex: 1;
+    .card h4{margin:0; font-size:18px; line-height:1.2}
+    .card .info{min-width:0; flex:1 1 auto}
+    .card .small{margin-top:6px; color:var(--muted); font-size:13px; display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .card .excerpt{margin:10px 0 0; color:#1f2937; font-size:14px; line-height:1.45}
+
+    .card .cta{
+      flex:0 0 auto;
+      margin-left:auto;
+      align-self:flex-start;
     }
 
-    .close-btn {
-      background: var(--bg-card);
-      border: none;
-      color: var(--text-secondary);
-      font-size: 1.5rem;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* Detail view */
+    .postView{display:none;}
+    .postShell{
+      margin-top:16px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      overflow:hidden;
     }
 
-    .close-btn:hover {
-      background: var(--bg-card-hover);
-      color: var(--text-primary);
+    .postHead{
+      position:sticky;
+      top:0;
+      z-index:30;
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(15,23,42,.08);
+      padding:18px;
     }
 
-    .modal-body {
-      padding: 2rem;
+    .postTitleRow{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    .postTitle{margin:0; font-size:32px; letter-spacing:-.02em; line-height:1.15}
+    .postMeta{color:var(--muted); font-weight:700; font-size:13px; margin-top:6px; display:flex; gap:10px; flex-wrap:wrap}
+
+    .postBtns{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+
+    .postCover{
+      margin-top:14px;
+      border-radius:18px;
+      border:1px solid rgba(15,23,42,.10);
+      overflow:hidden;
+      background:rgba(15,23,42,.03);
+    }
+    .postCover img{width:100%; height:auto; display:block; max-height:320px; object-fit:cover}
+
+    .postLead{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:18px;
+      border:1px solid rgba(59,130,246,.18);
+      background: rgba(59,130,246,.08);
+      color:#0f172a;
+      font-size:16px;
+      line-height:1.6;
     }
 
-    .modal-body .post-meta {
-      margin-bottom: 2rem;
+    .postBody{padding:18px;}
+
+    /* Markdown-ish styles */
+    #postContent{
+      font-size:16px;
+      line-height:1.75;
+      color:#0f172a;
+      overflow-wrap:anywhere;
+    }
+    #postContent h2{font-size:22px; margin:26px 0 10px}
+    #postContent h3{font-size:18px; margin:22px 0 8px}
+    #postContent p{margin:10px 0}
+    #postContent ul{margin:10px 0 12px 20px}
+    #postContent li{margin:7px 0}
+    #postContent hr{border:none; border-top:1px solid rgba(15,23,42,.10); margin:18px 0}
+    #postContent img{max-width:100%; border-radius:16px; border:1px solid rgba(15,23,42,.10); box-shadow: 0 10px 30px rgba(15,23,42,.06)}
+    #postContent figure{margin:14px 0}
+    #postContent figcaption{color:var(--muted); font-size:12px; margin-top:6px}
+    #postContent a{color:#2563eb; text-decoration:none; font-weight:700}
+    #postContent a:hover{text-decoration:underline}
+
+    /* Helpers */
+    .muted{color:var(--muted)}
+    .err{
+      margin-top:16px;
+      border:1px solid rgba(239,68,68,.25);
+      background: rgba(239,68,68,.08);
+      padding:14px 16px;
+      border-radius:18px;
+      color:#7f1d1d;
+      font-weight:700;
+      white-space:pre-wrap;
     }
 
-    .modal-body .post-content {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: var(--text-secondary);
-      white-space: pre-wrap;
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroGrid{grid-template-columns:1fr}
+      .hero h2{font-size:28px}
+      .grid{grid-template-columns:1fr}
+      .thumb,.thumbFallback{width:96px; height:72px; border-radius:16px}
+      .postTitle{font-size:26px}
+      .postCover img{max-height:240px}
     }
 
-    .share-section {
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    @media (max-width: 520px){
+      .wrap{padding:18px 12px 56px}
+      .hero{padding:16px}
+      .hero h2{font-size:24px}
+      .top{padding:12px 12px}
+      .btn{padding:9px 12px}
+      .panel{padding:14px}
+      .card{padding:14px; gap:12px}
+      .card h4{font-size:16px}
+      .postHead{padding:14px}
+      .postBody{padding:14px}
+      .postTitle{font-size:22px}
+      .postCover img{max-height:200px}
+      .postLead{font-size:15px}
+      /* Mobile: prevent ultra-narrow excerpts by moving CTA to its own row */
+      .card{flex-wrap:wrap}
+      .card .thumb{width:72px; height:72px; border-radius:16px}
+      .card .info{flex:1 1 0; min-width:0}
+      .card .cta{width:100%; margin-left:0; display:flex; justify-content:flex-end}
+      .card .cta .btn{min-width:110px}
+      .excerpt{white-space:normal; word-break:break-word; hyphens:auto}
+    }
+  
+
+    /* Plane intro animation (runs once on page load) */
+    #planeIntro{
+      position:fixed;
+      left:0;
+      top:0;
+      z-index:9999;
+      pointer-events:none;
+      opacity:0;
+      /* Start off-screen bottom-left so it can fly diagonally */
+      transform: translate3d(-40vw, 75vh, 0) rotate(-18deg);
+      will-change: transform, opacity;
+    }
+    #planeIntro.fly{
+      /* Slightly slower + diagonal */
+      animation: planeFly 4.2s cubic-bezier(.22,.61,.36,1) forwards;
+    }
+    #planeIntro .plane{
+      width:96px;
+      height:44px;
+      color: rgba(15,23,42,.92);
+      filter: drop-shadow(0 10px 12px rgba(15,23,42,.20));
+    }
+    #planeIntro .plane svg{ width:100%; height:100%; display:block; }
+    #planeIntro .trail{
+      position:absolute;
+      left:-190px;
+      top:50%;
+      width:190px;
+      height:3px;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.9));
+      transform: translateY(-50%);
+      border-radius:999px;
+      opacity:.9;
     }
 
-    .share-section h4 {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      color: var(--text-secondary);
+    /* ✈️ Flight path (dashed line) */
+    #planePath{
+      position:fixed;
+      left:-40vw;
+      top:75vh;
+      width:180vw;
+      height:2px;
+      z-index:9998;
+      pointer-events:none;
+      opacity:0;
+      transform-origin:left center;
+      transform: rotate(-18deg);
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,0) 0 10px,
+        rgba(255,255,255,.65) 10px 18px
+      );
+      filter: drop-shadow(0 10px 18px rgba(15,23,42,.10));
+    }
+    #planePath.show{
+      animation: pathFade 4.2s ease-in-out forwards;
+    }
+    @keyframes pathFade{
+      0%   { opacity:0; }
+      14%  { opacity:.55; }
+      88%  { opacity:.55; }
+      100% { opacity:0; }
     }
 
-    .share-buttons {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
+    @keyframes planeFly{
+      0%   { transform: translate3d(-40vw, 75vh, 0) rotate(-18deg); opacity:0; }
+      12%  { opacity:1; }
+      88%  { opacity:1; }
+      100% { transform: translate3d(130vw, -25vh, 0) rotate(-18deg); opacity:0; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      #planeIntro{ display:none !important; }
     }
 
-    /* Empty State */
-    .empty-state {
-      text-align: center;
-      padding: 4rem 2rem;
-      color: var(--text-secondary);
-    }
-
-    .empty-state .icon {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      opacity: 0.5;
-    }
-
-    .empty-state h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
-    }
-
-    /* Footer */
-    footer {
-      background: var(--bg-secondary);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 2rem 0;
-      margin-top: 4rem;
-      text-align: center;
-      color: var(--text-muted);
-    }
-
-    footer p {
-      margin-bottom: 0.5rem;
-    }
-
-    footer a {
-      color: var(--accent-primary);
-      text-decoration: none;
-      transition: color var(--transition-fast);
-    }
-
-    footer a:hover {
-      color: var(--accent-secondary);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 968px) {
-      .editor-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .editor-sidebar {
-        order: -1;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 0 1rem;
-      }
-
-      .header-content {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .nav-tabs {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .nav-tab {
-        padding: 0.75rem 1.25rem;
-        font-size: 0.85rem;
-      }
-
-      .hero h2 {
-        font-size: 2.5rem;
-      }
-
-      .hero p {
-        font-size: 1.1rem;
-      }
-
-      .posts-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .modal-content {
-        margin: 0;
-        max-height: 100vh;
-        border-radius: 0;
-      }
-    }
-
-    /* Loading State */
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      border-top-color: var(--accent-primary);
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Utility Classes */
-    .text-gradient {
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-  </style>
+</style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <div class="logo" onclick="showSection('home')">
-          ✨ Wanderlust
+  <!-- Plane intro (appears once on page load) -->
+    <div id="planePath" aria-hidden="true"></div>
+<div id="planeIntro" aria-hidden="true"><div class="trail"></div><div class="plane"><svg viewBox="0 0 220 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="jetMetal" x1="0" y1="20" x2="0" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="0.35" stop-color="#e5e7eb"/>
+      <stop offset="0.7" stop-color="#cbd5e1"/>
+      <stop offset="1" stop-color="#94a3b8"/>
+    </linearGradient>
+    <linearGradient id="jetShade" x1="0" y1="28" x2="0" y2="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0f172a" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#0f172a" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="jetStripe" x1="40" y1="50" x2="200" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ef4444" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#f97316" stop-opacity="0.92"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fuselage -->
+  <path d="M12 45
+           C18 33 34 27 56 27
+           H162
+           C186 27 202 33 210 41
+           L218 45
+           L210 49
+           C202 57 186 63 162 63
+           H56
+           C34 63 18 57 12 45 Z"
+        fill="url(#jetMetal)" stroke="#0f172a" stroke-opacity="0.22" stroke-width="1.4" />
+
+  <!-- Belly shading -->
+  <path d="M20 49
+           C28 58 40 61 56 61
+           H162
+           C178 61 192 57 203 50
+           C194 59 180 66 162 66
+           H56
+           C38 66 25 59 20 49 Z"
+        fill="url(#jetShade)" opacity="0.9"/>
+
+  <!-- Cockpit -->
+  <path d="M26 45
+           C30 38 36 35 44 35
+           C49 35 52 36 55 38
+           C47 40 40 43 34 48
+           C31 50 28 49 26 45 Z"
+        fill="#0f172a" opacity="0.55"/>
+
+  <!-- Windows -->
+  <g opacity="0.7" fill="#0f172a">
+    <circle cx="64" cy="41" r="2.2"/>
+    <circle cx="76" cy="41" r="2.2"/>
+    <circle cx="88" cy="41" r="2.2"/>
+    <circle cx="100" cy="41" r="2.2"/>
+    <circle cx="112" cy="41" r="2.2"/>
+    <circle cx="124" cy="41" r="2.2"/>
+    <circle cx="136" cy="41" r="2.2"/>
+    <circle cx="148" cy="41" r="2.2"/>
+    <circle cx="160" cy="41" r="2.2"/>
+  </g>
+
+  <!-- Stripe -->
+  <path d="M52 50 H170
+           C178 50 186 48 193 45
+           C186 52 178 54 170 54
+           H52 Z"
+        fill="url(#jetStripe)" opacity="0.85"/>
+
+  <!-- Wings -->
+  <path d="M92 50
+           L140 50
+           L170 78
+           L148 78
+           L122 60
+           L84 60 Z"
+        fill="#cbd5e1" stroke="#0f172a" stroke-opacity="0.18" stroke-width="1.1"/>
+
+  <!-- Wing top highlight -->
+  <path d="M96 52 L137 52 L160 74 L150 74 L124 58 L88 58 Z"
+        fill="#ffffff" opacity="0.35"/>
+
+  <!-- Engines -->
+  <g>
+    <ellipse cx="132" cy="66" rx="12.5" ry="7.2" fill="#e5e7eb" stroke="#0f172a" stroke-opacity="0.18" stroke-width="1"/>
+    <ellipse cx="132" cy="66" rx="8.5" ry="4.6" fill="#94a3b8" opacity="0.65"/>
+    <ellipse cx="150" cy="70" rx="10.5" ry="6.2" fill="#e5e7eb" stroke="#0f172a" stroke-opacity="0.18" stroke-width="1"/>
+    <ellipse cx="150" cy="70" rx="7.2" ry="4.0" fill="#94a3b8" opacity="0.65"/>
+  </g>
+
+  <!-- Tailplane -->
+  <path d="M170 56 L200 66 L188 72 L162 64 Z"
+        fill="#cbd5e1" stroke="#0f172a" stroke-opacity="0.16" stroke-width="1"/>
+
+  <!-- Tail fin -->
+  <path d="M176 32
+           L196 10
+           L206 10
+           L194 36 Z"
+        fill="#cbd5e1" stroke="#0f172a" stroke-opacity="0.16" stroke-width="1"/>
+  <path d="M184 32 L197 14 L203 14 L195 34 Z" fill="#ffffff" opacity="0.30"/>
+
+  <!-- Nose highlight -->
+  <path d="M12 45
+           C18 33 34 27 56 27
+           C42 30 30 36 24 45
+           C30 54 42 60 56 63
+           C34 63 18 57 12 45 Z"
+        fill="#ffffff" opacity="0.22"/>
+</svg></div></div>
+
+  <div class="wrap">
+    <div class="top">
+      <div class="brand" role="banner">
+        <div class="logo" aria-hidden="true"><span>🧭</span></div>
+        <div style="min-width:0">
+          <h1>Itinerary Index</h1>
+          <p>Tourist destinations, stays, food, and tips</p>
         </div>
-        <nav class="nav-tabs">
-          <button class="nav-tab active" onclick="showSection('home')" data-section="home">Home</button>
-          <button class="nav-tab" onclick="showSection('write')" data-section="write">Write</button>
-          <button class="nav-tab" onclick="showSection('posts')" data-section="posts">All Posts</button>
-        </nav>
+      </div>
+      <div class="nav" role="navigation" aria-label="Primary">
+        <button class="btn" id="homeBtn">Home</button>
+        <button class="btn primary" id="allBtn">All Posts</button>
+        <button class="btn" id="contactBtn">Contact</button>
       </div>
     </div>
-  </header>
 
-  <!-- Main Content -->
-  <main class="container">
-    <!-- Home Section -->
-    <section id="home" class="section active">
+    <!-- HOME / LIST VIEW -->
+    <section id="listView" class="listView">
       <div class="hero">
-        <h2>India Travel Blog<br>Places, Hotels & Food ✨</h2>
-        <p>My personal blog sharing guides to India's tourist destinations, best hotels, top restaurants, and authentic local cuisine.</p>
-        <button class="cta-button" onclick="showSection('write')">
-          <span>Start Writing</span>
-          <span>→</span>
-        </button>
-      </div>
+        <div class="heroGrid">
+          <div>
+            <h2>Find your next destination — fast.</h2>
+            <p class="sub">Practical destination guides with hotels, local food, and travel tips.</p>
 
-      <div class="posts-grid" id="home-posts">
-        <!-- Recent posts will be loaded here -->
-      </div>
-    </section>
+            <div class="heroActions">
+              <button class="btn primary" id="viewAllBtn">View all posts</button>
+              <button class="btn green" id="surpriseBtn">Surprise me</button>
+              <span class="statPill" id="loadedPill">0 loaded</span>
+            </div>
 
-    <!-- Write Section -->
-    <section id="write" class="section">
-      <div class="editor-layout">
-        <div class="editor-main">
-          <h3>Write a New Post</h3>
-          
-          <div class="form-group">
-            <label for="post-title">Post Title</label>
-            <input 
-              type="text" 
-              id="post-title" 
-              class="form-input" 
-              placeholder="e.g., Top 10 Places in Jaipur, Best Street Food in Delhi, Hidden Gems of Kerala..."
-              maxlength="100"
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="post-content">Post Content</label>
-            <textarea 
-              id="post-content" 
-              class="form-textarea" 
-              placeholder="Write your blog post here...
-
-Share details about tourist spots, recommended hotels, best restaurants, must-try local dishes, travel tips, and more.
-
-Example structure:
-- Introduction to the destination
-- Top attractions and what makes them special
-- Where to stay (budget, mid-range, luxury options)
-- Best restaurants and cafes
-- Local dishes you must try
-- Getting around and practical tips
-- Best time to visit"
-            ></textarea>
-            <div class="char-count">
-              <span id="word-count">0</span> words · <span id="char-count">0</span> characters
+            <div class="searchRow">
+              <div class="search" role="search">
+                <span aria-hidden="true">🔎</span>
+                <input id="searchInput" type="search" placeholder="Search destinations, cities, food…" />
+              </div>
+              <button class="chip" id="sortBtn" title="Toggle sort">Sort: Newest</button>
+              <button class="chip" id="clearBtn">Clear</button>
+              <button class="chip" id="reloadBtn">Reload</button>
             </div>
           </div>
 
-          <button class="btn-primary" onclick="publishPost()">
-            📝 Publish Post
-          </button>
+          <aside class="quote" aria-label="Travel quote">
+            <div class="kicker">TRAVEL QUOTE</div>
+            <p class="text" id="quoteText">Take only memories, leave only footprints.</p>
+            <p class="by" id="quoteBy">— Chief Seattle</p>
+          </aside>
         </div>
 
-        <div class="editor-sidebar">
-          <h3 style="margin-bottom: 1rem;">Quick Actions</h3>
-          <button class="btn-secondary" onclick="saveAsDraft()">
-            💾 Save as Draft
-          </button>
-          <button class="btn-secondary" onclick="clearEditor()">
-            🗑️ Clear Editor
-          </button>
+        <div id="errorBox" class="err" style="display:none"></div>
+      </div>
+
+      <div class="grid">
+        <div class="panel" id="featuredPanel">
+          <h3>Featured post</h3>
+          <div class="meta" id="featuredMeta">No featured post yet</div>
+          <div id="featuredSlot"></div>
+        </div>
+
+        <div class="panel">
+          <h3>Latest posts</h3>
+          <div class="meta" id="latestMeta">0 posts • Newest first</div>
+          <div id="latestSlot"></div>
+        </div>
+      
+      <div class="panel" id="contactSection" style="margin-top:16px">
+        <h3>Contact</h3>
+        <div class="meta">Questions, collaborations, or itinerary ideas? Email me.</div>
+        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center">
+          <a class="btn primary" href="mailto:ayushisharmahpu@gmail.com" style="text-decoration:none">Email me</a>
+          <span class="muted" style="font-weight:700">ayushisharmahpu@gmail.com</span>
+        </div>
+      </div>
+</div>
+    </section>
+
+    <!-- DETAIL VIEW -->
+    <section id="postView" class="postView">
+      <div class="postShell">
+        <div class="postHead">
+          <div class="postTitleRow">
+            <div>
+              <h2 class="postTitle" id="postTitle">Post</h2>
+              <div class="postMeta" id="postMeta"></div>
+            </div>
+            <div class="postBtns">
+              <button class="btn" id="backBtn">Back</button>
+              <button class="btn primary" id="copyBtn">Copy link</button>
+            </div>
+          </div>
+          <div class="postCover" id="postCover" style="display:none">
+            <img id="postCoverImg" alt="" />
+          </div>
+          <div class="postLead" id="postLead" style="display:none"></div>
+        </div>
+        <div class="postBody">
+          <div id="postContent"></div>
         </div>
       </div>
     </section>
-
-    <!-- Posts Section -->
-    <section id="posts" class="section">
-      <h2 style="margin-bottom: 2rem; font-family: 'Playfair Display', serif; font-size: 2.5rem;">
-        All Blog Posts
-      </h2>
-      <div class="posts-grid" id="all-posts">
-        <!-- All posts will be loaded here -->
-      </div>
-    </section>
-  </main>
-
-  <!-- Post Modal -->
-  <div id="post-modal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="modal-title"></h2>
-        <button class="close-btn" onclick="closeModal()">×</button>
-      </div>
-      <div class="modal-body">
-        <div class="post-meta" id="modal-meta"></div>
-        <div class="post-content" id="modal-content"></div>
-        <div class="share-section">
-          <h4>Share this post</h4>
-          <div class="share-buttons" id="modal-share-buttons"></div>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>Wanderlust ✨ - India Travel Blog</p>
-      <p style="font-size: 0.85rem;">
-        Sharing guides about destinations, hotels, restaurants & local flavors
-      </p>
-    </div>
-  </footer>
+<script>
 
-  <script>
-    // Navigation
-    function showSection(sectionId) {
-      // Update sections
-      document.querySelectorAll('.section').forEach(section => {
-        section.classList.remove('active');
-      });
-      document.getElementById(sectionId).classList.add('active');
+  // SEO helpers (update title/description/og tags for the current view)
+  const SITE_URL = "https://ayushisharmahpu-kushi.github.io/Travel/";
 
-      // Update nav tabs
-      document.querySelectorAll('.nav-tab').forEach(tab => {
-        tab.classList.remove('active');
-        if (tab.dataset.section === sectionId) {
-          tab.classList.add('active');
-        }
-      });
+  function setMeta(nameOrProp, value, isProp=false){
+    if (!value) return;
+    const selector = isProp ? `meta[property="${nameOrProp}"]` : `meta[name="${nameOrProp}"]`;
+    let tag = document.querySelector(selector);
+    if (!tag){
+      tag = document.createElement('meta');
+      if (isProp) tag.setAttribute('property', nameOrProp);
+      else tag.setAttribute('name', nameOrProp);
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute('content', value);
+  }
 
-      // Load posts if needed
-      if (sectionId === 'home' || sectionId === 'posts') {
-        loadPosts();
-      }
+  function setCanonical(url){
+    let link = document.querySelector('link[rel="canonical"]');
+    if (!link){
+      link = document.createElement('link');
+      link.rel = 'canonical';
+      document.head.appendChild(link);
+    }
+    link.href = url;
+  }
+
+  function getPostIdFromUrl(){
+    const sp = new URLSearchParams(window.location.search);
+    const qp = sp.get('post');
+    if (qp) return qp;
+    const h = (window.location.hash || '').replace(/^#/, '');
+    if (h.startsWith('post=')) return decodeURIComponent(h.slice(5));
+    return '';
+  }
+
+  function setUrlToPost(id){
+    const url = new URL(window.location.href);
+    url.hash = ''; // prefer query param for shareable links
+    url.searchParams.set('post', id);
+    window.history.pushState({}, '', url.toString());
+  }
+
+  function setUrlToHome(){
+    const url = new URL(window.location.href);
+    url.hash = '';
+    url.searchParams.delete('post');
+    window.history.pushState({}, '', url.toString());
+  }
+
+  /**********************
+   * Global error surfacing (so "0 loaded" isn't silent)
+   **********************/
+  window.addEventListener('error', (ev) => {
+    const msg = (ev && ev.error && ev.error.message) ? ev.error.message : (ev && ev.message) ? ev.message : 'Unknown error';
+    showError('JavaScript error:\\n\\n' + msg + '\\n\\nOpen DevTools → Console for full details.');
+  });
+
+  /**********************
+   * Small utilities
+   **********************/
+  function getBasePath(){
+    const p = window.location.pathname;
+    return p.endsWith('/') ? p : p.slice(0, p.lastIndexOf('/') + 1);
+  }
+
+  function resolveUrl(path){
+    if (!path) return '';
+    if (/^https?:\/\//i.test(path) || path.startsWith('data:')) return path;
+    const base = getBasePath();
+    return base + String(path).replace(/^\/+/, '');
+  }
+
+  function safeText(v){
+    return (v == null) ? '' : String(v);
+  }
+
+  function escapeHtml(str){
+    return safeText(str)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#39;');
+  }
+
+  function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+  function formatDate(post){
+    if (post && post.date && typeof post.date === 'string') return post.date;
+    const ts = Number(post?.timestamp);
+    if (!Number.isFinite(ts)) return '';
+    try {
+      const d = new Date(ts);
+      return d.toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+    } catch { return ''; }
+  }
+
+  function estimateReadTime(md){
+    const text = safeText(md).replace(/\s+/g,' ').trim();
+    if (!text) return 1;
+    const words = text.split(' ').length;
+    return clamp(Math.round(words / 200), 1, 20);
+  }
+
+  function cacheBust(url){
+    if (!url) return '';
+    const sep = url.includes('?') ? '&' : '?';
+    return url + sep + 'v=' + Date.now();
+  }
+
+  function stripMarkdown(md){
+    return safeText(md)
+      .replace(/!\[[^\]]*\]\([^)]+\)/g,'')
+      .replace(/\[[^\]]*\]\([^)]+\)/g,'')
+      .replace(/[#>*_`~\-]/g,'')
+      .replace(/\s+/g,' ')
+      .trim();
+  }
+
+  function extractFirstImage(md){
+    const m = safeText(md).match(/!\[[^\]]*\]\(([^)]+)\)/);
+    return m ? m[1].trim() : '';
+  }
+
+  function extractLeadAndRest(md){
+    const lines = safeText(md).split(/\r?\n/);
+    let i = 0;
+
+    while (i < lines.length) {
+      const t = lines[i].trim();
+      if (!t) { i++; continue; }
+      if (t.startsWith('![')) { i++; continue; }
+      if (/^#{1,6}\s+/.test(t)) { break; }
+      break;
     }
 
-    // Character and word count
-    const contentTextarea = document.getElementById('post-content');
-    const wordCountSpan = document.getElementById('word-count');
-    const charCountSpan = document.getElementById('char-count');
+    let leadLines = [];
+    while (i < lines.length) {
+      const t = lines[i].trim();
+      if (!t) break;
+      if (/^#{1,6}\s+/.test(t)) break;
+      if (t === '---') break;
+      leadLines.push(lines[i]);
+      i++;
+    }
 
-    contentTextarea.addEventListener('input', () => {
-      const text = contentTextarea.value;
-      const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
-      const chars = text.length;
-      
-      wordCountSpan.textContent = words;
-      charCountSpan.textContent = chars;
-    });
+    const lead = stripMarkdown(leadLines.join('\n')).trim();
+    const rest = lines.slice(i).join('\n');
+    return { lead, rest };
+  }
 
-    // Publish post
-    async function publishPost() {
-      const title = document.getElementById('post-title').value.trim();
-      const content = document.getElementById('post-content').value.trim();
+  /**********************
+   * Minimal markdown -> HTML
+   **********************/
+  function renderInline(text){
+    let out = '';
+    const s = safeText(text);
+    let i = 0;
 
-      if (!title || !content) {
-        alert('Please enter both a title and content for your post.');
-        return;
+    while (i < s.length) {
+      if (s[i] === '[') {
+        const close = s.indexOf(']', i);
+        const openParen = close !== -1 ? s.indexOf('(', close) : -1;
+        const closeParen = openParen !== -1 ? s.indexOf(')', openParen) : -1;
+        if (close !== -1 && openParen === close + 1 && closeParen !== -1) {
+          const label = s.slice(i + 1, close);
+          const href = s.slice(openParen + 1, closeParen).trim();
+          out += `<a href="${escapeHtml(resolveUrl(href))}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`;
+          i = closeParen + 1;
+          continue;
+        }
+      }
+      out += escapeHtml(s[i]);
+      i++;
+    }
+
+    out = out
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+    return out;
+  }
+
+  function mdToHtml(md){
+    const lines = safeText(md).split(/\r?\n/);
+    let html = '';
+    let inList = false;
+
+    const closeList = () => { if (inList){ html += '</ul>'; inList = false; } };
+
+    for (let idx = 0; idx < lines.length; idx++) {
+      const raw = lines[idx];
+      const line = raw.trim();
+      if (!line){ closeList(); continue; }
+
+      if (line === '---') { closeList(); html += '<hr />'; continue; }
+
+      if (line.startsWith('![')){
+        closeList();
+        const m = line.match(/^!\[([^\]]*)\]\(([^)]+)\)/);
+        if (m){
+          const alt = m[1];
+          const src = resolveUrl(m[2].trim());
+          html += `<figure><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy" /></figure>`;
+          continue;
+        }
       }
 
-      try {
-        const post = {
-          id: Date.now().toString(),
-          title: title,
-          content: content,
-          date: new Date().toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-          }),
-          timestamp: Date.now()
+      const h = line.match(/^(#{1,6})\s+(.+)$/);
+      if (h){
+        closeList();
+        const level = clamp(h[1].length, 2, 3);
+        html += `<h${level}>${renderInline(h[2])}</h${level}>`;
+        continue;
+      }
+
+      const boldLine = line.match(/^\*\*(.+?)\*\*$/);
+      if (boldLine){
+        closeList();
+        html += `<h3>${renderInline(boldLine[1])}</h3>`;
+        continue;
+      }
+
+      const li = line.match(/^[-•]\s+(.+)$/);
+      if (li){
+        if (!inList){ html += '<ul>'; inList = true; }
+        html += `<li>${renderInline(li[1])}</li>`;
+        continue;
+      }
+
+      closeList();
+      html += `<p>${renderInline(line)}</p>`;
+    }
+
+    closeList();
+    return html;
+  }
+
+  /**********************
+   * App state
+   **********************/
+  const state = {
+    posts: [],
+    filtered: [],
+    newestFirst: true,
+    quotes: [
+      { t: 'Take only memories, leave only footprints.', b: 'Chief Seattle' },
+      { t: 'Travel is the only thing you buy that makes you richer.', b: 'Anonymous' },
+      { t: 'Not all those who wander are lost.', b: 'J.R.R. Tolkien' },
+      { t: 'Life is short and the world is wide.', b: 'Simon Raven' },
+      { t: 'Wherever you go becomes a part of you somehow.', b: 'Anita Desai' },
+    ]
+  };
+
+  const el = (id) => document.getElementById(id);
+
+  function showError(msg){
+    const box = el('errorBox');
+    if (!box) return;
+    box.style.display = 'block';
+    box.textContent = msg;
+  }
+
+  function clearError(){
+    const box = el('errorBox');
+    if (!box) return;
+    box.style.display = 'none';
+    box.textContent = '';
+  }
+
+  function normalizePosts(list){
+    const arr = Array.isArray(list) ? list : [];
+    return arr
+      .map(p => {
+        const ts = Number(p?.timestamp);
+        const safeTs = Number.isFinite(ts) ? ts : Date.now();
+        const content = safeText(p?.content);
+        const cover = safeText(p?.coverImage || p?.cover_image || p?.cover || '') || extractFirstImage(content);
+        return {
+          id: safeText(p?.id) || ('post-' + safeTs),
+          title: safeText(p?.title) || 'Untitled',
+          content,
+          coverImage: cover,
+          date: safeText(p?.date),
+          timestamp: safeTs,
+          featured: !!p?.featured,
+          featuredExcerpt: safeText(p?.featuredExcerpt),
         };
+      })
+      .filter(p => !!p.id);
+  }
 
-        await window.storage.set(`post:${post.id}`, JSON.stringify(post), false);
-        
-        // Clear editor
-        document.getElementById('post-title').value = '';
-        document.getElementById('post-content').value = '';
-        wordCountSpan.textContent = '0';
-        charCountSpan.textContent = '0';
+  async function tryFetchJson(url){
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  }
 
-        alert('Post published successfully! 🎉');
-        showSection('posts');
-      } catch (error) {
-        alert('Error publishing post: ' + error.message);
-      }
-    }
+  async function loadPosts(){
+    clearError();
 
-    // Load posts
-    async function loadPosts() {
-      try {
-        const result = await window.storage.list('post:', false);
-        
-        if (!result || !result.keys || result.keys.length === 0) {
-          showEmptyState();
-          return;
-        }
+    // Try a couple of URLs (GitHub Pages can be finicky if a file was renamed/moved)
+    const candidates = [
+      resolveUrl('posts.json'),
+      resolveUrl('./posts.json'),
+      // fallback (in case a previous filename is used)
+      resolveUrl('post.json'),
+      resolveUrl('./post.json'),
+    ];
 
-        const posts = [];
-        for (const key of result.keys) {
-          const postData = await window.storage.get(key, false);
-          if (postData) {
-            posts.push(JSON.parse(postData.value));
-          }
-        }
+    let lastErr = null;
 
-        // Sort by timestamp (newest first)
-        posts.sort((a, b) => b.timestamp - a.timestamp);
-
-        // Render posts
-        renderPosts(posts);
-      } catch (error) {
-        console.error('Error loading posts:', error);
-        showEmptyState();
-      }
-    }
-
-    function renderPosts(posts) {
-      const homePosts = document.getElementById('home-posts');
-      const allPosts = document.getElementById('all-posts');
-
-      if (posts.length === 0) {
-        showEmptyState();
+    for (const u of candidates){
+      try{
+        const json = await tryFetchJson(u);
+        state.posts = normalizePosts(json);
+        applyFilter();
         return;
+      } catch (e){
+        lastErr = e;
       }
-
-      const postsHTML = posts.map(post => {
-        const excerpt = post.content.substring(0, 150) + (post.content.length > 150 ? '...' : '');
-        const wordCount = post.content.split(/\s+/).filter(w => w.length > 0).length;
-        
-        return `
-          <article class="post-card" onclick="openPost('${post.id}')">
-            <h3>${escapeHtml(post.title)}</h3>
-            <div class="post-meta">
-              <span>📅 ${post.date}</span>
-              <span>📝 ${wordCount} words</span>
-            </div>
-            <p class="post-excerpt">${escapeHtml(excerpt)}</p>
-            <div class="post-actions">
-              <button class="action-btn" onclick="event.stopPropagation(); sharePost('${post.id}', 'twitter')">
-                🐦 Twitter
-              </button>
-              <button class="action-btn" onclick="event.stopPropagation(); sharePost('${post.id}', 'facebook')">
-                📘 Facebook
-              </button>
-              <button class="action-btn delete" onclick="event.stopPropagation(); deletePost('${post.id}')">
-                🗑️ Delete
-              </button>
-            </div>
-          </article>
-        `;
-      }).join('');
-
-      // Show latest 6 posts on home
-      const recentPostsHTML = posts.slice(0, 6).map(post => {
-        const excerpt = post.content.substring(0, 150) + (post.content.length > 150 ? '...' : '');
-        const wordCount = post.content.split(/\s+/).filter(w => w.length > 0).length;
-        
-        return `
-          <article class="post-card" onclick="openPost('${post.id}')">
-            <h3>${escapeHtml(post.title)}</h3>
-            <div class="post-meta">
-              <span>📅 ${post.date}</span>
-              <span>📝 ${wordCount} words</span>
-            </div>
-            <p class="post-excerpt">${escapeHtml(excerpt)}</p>
-          </article>
-        `;
-      }).join('');
-
-      homePosts.innerHTML = recentPostsHTML || '<div class="empty-state"><div class="icon">📝</div><h3>No posts yet</h3><p>Start writing to see your posts here</p></div>';
-      allPosts.innerHTML = postsHTML;
     }
 
-    function showEmptyState() {
-      const emptyHTML = `
-        <div class="empty-state">
-          <div class="icon">📝</div>
-          <h3>No blog posts yet</h3>
-          <p>Start writing and sharing your India travel guides - from top tourist spots to hidden gems!</p>
-          <button class="cta-button" onclick="showSection('write')" style="margin-top: 1rem;">
-            Write Your First Post →
-          </button>
+    // Final attempt with cache-bust in case CDN is holding an older empty file
+    try{
+      const json = await tryFetchJson(cacheBust(resolveUrl('posts.json')));
+      state.posts = normalizePosts(json);
+      applyFilter();
+      return;
+    } catch (e){
+      lastErr = e;
+    }
+
+    state.posts = [];
+    state.filtered = [];
+    render();
+    showError(
+      `Could not load posts JSON.\\n\\nFix:\\n1) Ensure posts.json is next to index.html\\n2) Ensure it starts with [ and ends with ]\\n3) Check that you can open: ${resolveUrl('posts.json')}\\n\\nDetails: ${lastErr?.message || lastErr}`
+    );
+  }
+
+  function applyFilter(){
+    const input = el('searchInput');
+    const q = input ? input.value.trim().toLowerCase() : '';
+    let list = [...state.posts];
+
+    list.sort((a,b) => state.newestFirst ? (b.timestamp - a.timestamp) : (a.timestamp - b.timestamp));
+
+    if (q){
+      list = list.filter(p => {
+        const hay = (p.title + ' ' + p.content).toLowerCase();
+        return hay.includes(q);
+      });
+    }
+
+    state.filtered = list;
+    render();
+  }
+
+  function pickFeatured(){
+    const featured = state.filtered.find(p => p.featured) || state.posts.find(p => p.featured);
+    return featured || null;
+  }
+
+  function excerptFor(post){
+    if (!post) return '';
+    if (post.featuredExcerpt) return post.featuredExcerpt;
+
+    const { lead } = extractLeadAndRest(post.content);
+    if (lead) return lead;
+
+    const plain = stripMarkdown(post.content);
+    return plain.length > 180 ? (plain.slice(0, 180).trim() + '…') : plain;
+  }
+
+  function cardThumb(post){
+    const url = post.coverImage ? resolveUrl(post.coverImage) : '';
+    if (!url) return `<div class="thumbFallback" aria-hidden="true">TRIP</div>`;
+    return `<img class="thumb" src="${escapeHtml(cacheBust(url))}" alt="" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'" /><div class="thumbFallback" aria-hidden="true" style="display:none">TRIP</div>`;
+  }
+
+  function card(post){
+    const dateStr = formatDate(post);
+    const mins = estimateReadTime(post.content);
+    const ex = excerptFor(post);
+
+    return `
+      <div class="card">
+        ${cardThumb(post)}
+        <div class="info">
+          <h4>${escapeHtml(post.title)}</h4>
+          <div class="small">
+            ${dateStr ? `<span>${escapeHtml(dateStr)}</span>` : ''}
+            <span>•</span>
+            <span>${mins} min read</span>
+          </div>
+          ${ex ? `<p class="excerpt">${escapeHtml(ex)}</p>` : ''}
         </div>
-      `;
-      
-      document.getElementById('home-posts').innerHTML = emptyHTML;
-      document.getElementById('all-posts').innerHTML = emptyHTML;
+        <div class="cta">
+          <button class="btn primary" onclick="openPostById('${escapeHtml(post.id)}')">Read</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function render(){
+    el('loadedPill').textContent = `${state.filtered.length} loaded`;
+
+    const featured = pickFeatured();
+    if (featured){
+      el('featuredMeta').textContent = `Featured • ${formatDate(featured) || ''}`.trim();
+      el('featuredSlot').innerHTML = card(featured);
+    } else {
+      el('featuredMeta').textContent = 'No featured post yet';
+      el('featuredSlot').innerHTML = '';
     }
 
-    // Open post in modal
-    async function openPost(postId) {
-      try {
-        const postData = await window.storage.get(`post:${postId}`, false);
-        if (!postData) return;
+    const latest = state.filtered.slice(0, 6);
+    el('latestMeta').textContent = `${state.filtered.length} posts • ${state.newestFirst ? 'Newest first' : 'Oldest first'}`;
+    el('latestSlot').innerHTML = latest.map(p => card(p)).join('');
+  }
 
-        const post = JSON.parse(postData.value);
-        const wordCount = post.content.split(/\s+/).filter(w => w.length > 0).length;
-        
-        document.getElementById('modal-title').textContent = post.title;
-        document.getElementById('modal-meta').innerHTML = `
-          <span>📅 ${post.date}</span>
-          <span>📝 ${wordCount} words</span>
-        `;
-        document.getElementById('modal-content').textContent = post.content;
-        
-        // Share buttons
-        const shareButtons = document.getElementById('modal-share-buttons');
-        shareButtons.innerHTML = `
-          <button class="action-btn" onclick="sharePost('${post.id}', 'twitter')">🐦 Twitter</button>
-          <button class="action-btn" onclick="sharePost('${post.id}', 'facebook')">📘 Facebook</button>
-          <button class="action-btn" onclick="sharePost('${post.id}', 'linkedin')">💼 LinkedIn</button>
-          <button class="action-btn" onclick="sharePost('${post.id}', 'whatsapp')">💬 WhatsApp</button>
-          <button class="action-btn" onclick="copyPostLink('${post.id}')">🔗 Copy Link</button>
-        `;
+  function setView(view){
+    const list = el('listView');
+    const post = el('postView');
+    const isPost = view === 'post';
+    list.style.display = isPost ? 'none' : 'block';
+    post.style.display = isPost ? 'block' : 'none';
+  }
 
-        document.getElementById('post-modal').classList.add('active');
-      } catch (error) {
-        alert('Error loading post: ' + error.message);
-      }
+  function openPostById(id){
+    const post = state.posts.find(p => p.id === id) || state.filtered.find(p => p.id === id);
+    if (!post) return;
+
+    const desiredHash = 'post=' + encodeURIComponent(post.id);
+    if ((window.location.hash || '').replace(/^#/, '') !== desiredHash) {
+      window.location.hash = desiredHash;
     }
 
-    function closeModal() {
-      document.getElementById('post-modal').classList.remove('active');
+    el('postTitle').textContent = post.title;
+    // Update SEO (best-effort; some crawlers don't run JS)
+    document.title = `${post.title} | Itinerary Index`;
+    const desc = excerptFor(post) || 'Practical destination guides with hotels, local food, and travel tips.';
+    setMeta('description', desc, false);
+    setMeta('og:title', document.title, true);
+    setMeta('og:description', desc, true);
+    setMeta('twitter:title', document.title, false);
+    setMeta('twitter:description', desc, false);
+    const canonical = SITE_URL + `?post=${encodeURIComponent(post.id)}`;
+    setCanonical(canonical);
+    setMeta('og:url', canonical, true);
+    const ogImage = post.coverImage ? (SITE_URL + post.coverImage.replace(/^\/+/, '')) : "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg";
+    setMeta('og:image', ogImage, true);
+    setMeta('twitter:image', ogImage, false);
+
+    const dateStr = formatDate(post);
+    const mins = estimateReadTime(post.content);
+    el('postMeta').innerHTML = `${dateStr ? escapeHtml(dateStr) : ''}${dateStr ? ' • ' : ''}${mins} min read`;
+
+    const coverEl = el('postCover');
+    const coverImg = el('postCoverImg');
+    const coverUrl = post.coverImage ? resolveUrl(post.coverImage) : '';
+    if (coverUrl){
+      coverImg.src = cacheBust(coverUrl);
+      coverImg.alt = post.title;
+      coverEl.style.display = 'block';
+      coverImg.onerror = () => { coverEl.style.display = 'none'; };
+    } else {
+      coverEl.style.display = 'none';
     }
 
-    // Delete place
-    // Delete place
-    async function deletePost(postId) {
-      if (!confirm('Are you sure you want to delete this post?')) {
-        return;
-      }
-
-      try {
-        await window.storage.delete(`post:${postId}`, false);
-        loadPosts();
-      } catch (error) {
-        alert('Error deleting post: ' + error.message);
-      }
+    const { lead, rest } = extractLeadAndRest(post.content);
+    const leadEl = el('postLead');
+    const leadText = lead || (post.featuredExcerpt ? stripMarkdown(post.featuredExcerpt) : '');
+    if (leadText){
+      leadEl.textContent = leadText;
+      leadEl.style.display = 'block';
+      el('postContent').innerHTML = lead ? mdToHtml(rest) : mdToHtml(post.content);
+    } else {
+      leadEl.style.display = 'none';
+      el('postContent').innerHTML = mdToHtml(post.content);
     }
 
-    // Share post
-    async function sharePost(postId, platform) {
-      try {
-        const postData = await window.storage.get(`post:${postId}`, false);
-        if (!postData) return;
+    setView('post');
 
-        const post = JSON.parse(postData.value);
-        const url = window.location.href;
-        const text = `Check out: ${post.title}`;
-
-        const shareUrls = {
-          twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
-          facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-          linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-          whatsapp: `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`
-        };
-
-        if (shareUrls[platform]) {
-          window.open(shareUrls[platform], '_blank', 'width=600,height=400');
-        }
-      } catch (error) {
-        console.error('Error sharing post:', error);
-      }
-    }
-
-    function copyPostLink(postId) {
-      const url = `${window.location.href}#post-${postId}`;
-      navigator.clipboard.writeText(url).then(() => {
-        alert('Link copied to clipboard!');
-      }).catch(err => {
-        console.error('Error copying link:', err);
-      });
-    }
-
-    // Save as draft
-    function saveAsDraft() {
-      const title = document.getElementById('post-title').value;
-      const content = document.getElementById('post-content').value;
-      
-      if (!title && !content) {
-        alert('Nothing to save as draft');
-        return;
-      }
-
-      localStorage.setItem('blog-draft', JSON.stringify({ title, content }));
-      alert('Draft saved! ✅');
-    }
-
-    // Clear editor
-    function clearEditor() {
-      if (confirm('Are you sure you want to clear the editor?')) {
-        document.getElementById('post-title').value = '';
-        document.getElementById('post-content').value = '';
-        wordCountSpan.textContent = '0';
-        charCountSpan.textContent = '0';
-      }
-    }
-
-    // Utility function
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    // Load draft on page load
-    window.addEventListener('DOMContentLoaded', () => {
-      const draft = localStorage.getItem('blog-draft');
-      if (draft) {
-        const { title, content } = JSON.parse(draft);
-        if (confirm('You have a saved draft. Would you like to restore it?')) {
-          document.getElementById('post-title').value = title || '';
-          document.getElementById('post-content').value = content || '';
-          
-          // Update counts
-          const words = content ? content.trim().split(/\s+/).filter(word => word.length > 0).length : 0;
-          const chars = content ? content.length : 0;
-          wordCountSpan.textContent = words;
-          charCountSpan.textContent = chars;
-        }
-      }
-
-      // Load posts
-      loadPosts();
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
     });
+  }
 
-    // Close modal on ESC key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeModal();
-      }
+  function goHome(){
+    setUrlToHome();
+    setView('list');
+    document.title = 'Itinerary Index';
+    setMeta('description', 'Travel destinations, stays, food, and tips.', false);
+    setCanonical(SITE_URL);
+    setMeta('og:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', true);
+    setMeta('og:description', 'Practical destination guides with hotels, local food, and travel tips.', true);
+    setMeta('og:url', SITE_URL, true);
+    setMeta('og:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg", true);
+    setMeta('twitter:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', false);
+    setMeta('twitter:description', 'Practical destination guides with hotels, local food, and travel tips.', false);
+    setMeta('twitter:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg", false);
+
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
     });
-  </script>
+  }
+
+  function handleHash(){
+    const id = getPostIdFromUrl();
+    if (!id){ setView('list'); return; }
+    openPostById(id);
+  }
+
+  function pickRandomQuote(){
+    const q = state.quotes[Math.floor(Math.random() * state.quotes.length)];
+    el('quoteText').textContent = q.t;
+    el('quoteBy').textContent = '— ' + q.b;
+  }
+
+  // Wire up
+  el('homeBtn').addEventListener('click', goHome);
+  el('contactBtn').addEventListener('click', () => {
+    setView('list');
+    document.title = 'Itinerary Index';
+    setMeta('description', 'Travel destinations, stays, food, and tips.', false);
+    setCanonical(SITE_URL);
+    setMeta('og:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', true);
+    setMeta('og:description', 'Practical destination guides with hotels, local food, and travel tips.', true);
+    setMeta('og:url', SITE_URL, true);
+    setMeta('og:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg", true);
+    setMeta('twitter:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', false);
+    setMeta('twitter:description', 'Practical destination guides with hotels, local food, and travel tips.', false);
+    setMeta('twitter:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg", false);
+
+    requestAnimationFrame(() => {
+      document.getElementById('contactSection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+  el('allBtn').addEventListener('click', () => {
+    setView('list');
+    document.title = 'Itinerary Index';
+    setMeta('description', 'Travel destinations, stays, food, and tips.', false);
+    setCanonical(SITE_URL);
+    setMeta('og:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', true);
+    setMeta('og:description', 'Practical destination guides with hotels, local food, and travel tips.', true);
+    setMeta('og:url', SITE_URL, true);
+    setMeta('og:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg", true);
+    setMeta('twitter:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', false);
+    setMeta('twitter:description', 'Practical destination guides with hotels, local food, and travel tips.', false);
+    setMeta('twitter:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg", false);
+
+    requestAnimationFrame(() => {
+      document.querySelector('#featuredPanel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+  el('viewAllBtn').addEventListener('click', () => {
+    document.querySelector('#featuredPanel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  el('surpriseBtn').addEventListener('click', () => {
+    if (!state.filtered.length) return;
+    const p = state.filtered[Math.floor(Math.random() * state.filtered.length)];
+    openPostById(p.id);
+  });
+
+  el('reloadBtn').addEventListener('click', loadPosts);
+  el('clearBtn').addEventListener('click', () => {
+    el('searchInput').value = '';
+    applyFilter();
+  });
+
+  el('sortBtn').addEventListener('click', () => {
+    state.newestFirst = !state.newestFirst;
+    el('sortBtn').textContent = 'Sort: ' + (state.newestFirst ? 'Newest' : 'Oldest');
+    applyFilter();
+  });
+
+  el('searchInput').addEventListener('input', () => {
+    applyFilter();
+  });
+
+  el('backBtn').addEventListener('click', goHome);
+  el('copyBtn').addEventListener('click', async () => {
+    try{
+      await navigator.clipboard.writeText(window.location.href);
+      el('copyBtn').textContent = 'Copied!';
+      setTimeout(() => el('copyBtn').textContent = 'Copy link', 1200);
+    } catch {
+      el('copyBtn').textContent = 'Copy failed';
+      setTimeout(() => el('copyBtn').textContent = 'Copy link', 1200);
+    }
+  });
+
+  window.addEventListener('hashchange', handleHash);
+  window.addEventListener('popstate', handleHash);
+
+  // Init
+  pickRandomQuote();
+  loadPosts().then(() => handleHash());
+
+
+  /**********************
+   * Plane intro (one-time on load)
+   **********************/
+  function runPlaneIntro(){
+    const plane = document.getElementById('planeIntro');
+    const path = document.getElementById('planePath');
+
+    // start the dashed flight path
+    if (path){
+      path.classList.remove('show');
+      void path.offsetWidth; // reflow
+      path.classList.add('show');
+    }
+
+    if (!plane) return;
+
+    // restart animation safely
+    plane.classList.remove('fly');
+    void plane.offsetWidth;
+    plane.classList.add('fly');
+
+    plane.addEventListener('animationend', () => {
+      plane.remove();
+      if (path) path.remove();
+    }, { once:true });
+  }
+
+  window.addEventListener('load', runPlaneIntro);
+
+</script>
 </body>
 </html>
