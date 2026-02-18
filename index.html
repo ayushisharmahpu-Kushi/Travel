@@ -5,7 +5,39 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Itinerary Index</title>
   <meta name="description" content="Travel destinations, stays, food, and tips." />
-  <style>
+  
+  <!-- SEO + Social -->
+  <link rel="canonical" href="https://ayushisharmahpu-kushi.github.io/Travel/" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#f8fbff" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Itinerary Index" />
+  <meta property="og:title" content="Itinerary Index — India Travel Guides, Hotels & Local Food" />
+  <meta property="og:description" content="Practical destination guides with hotels, local food, and travel tips." />
+  <meta property="og:url" content="https://ayushisharmahpu-kushi.github.io/Travel/" />
+  <meta property="og:image" content="https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Itinerary Index — India Travel Guides, Hotels & Local Food" />
+  <meta name="twitter:description" content="Practical destination guides with hotels, local food, and travel tips." />
+  <meta name="twitter:image" content="https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Itinerary Index",
+    "url": "https://ayushisharmahpu-kushi.github.io/Travel/",
+    "description": "Practical destination guides with hotels, local food, and travel tips.",
+    "inLanguage": "en"
+  }
+  </script>
+
+<style>
     :root{
       --bg1:#f8fbff;
       --bg2:#fff7f0;
@@ -646,6 +678,56 @@
   </div>
 
 <script>
+
+  // SEO helpers (update title/description/og tags for the current view)
+  const SITE_URL = "https://ayushisharmahpu-kushi.github.io/Travel/";
+
+  function setMeta(nameOrProp, value, isProp=false){
+    if (!value) return;
+    const selector = isProp ? `meta[property="${nameOrProp}"]` : `meta[name="${nameOrProp}"]`;
+    let tag = document.querySelector(selector);
+    if (!tag){
+      tag = document.createElement('meta');
+      if (isProp) tag.setAttribute('property', nameOrProp);
+      else tag.setAttribute('name', nameOrProp);
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute('content', value);
+  }
+
+  function setCanonical(url){
+    let link = document.querySelector('link[rel="canonical"]');
+    if (!link){
+      link = document.createElement('link');
+      link.rel = 'canonical';
+      document.head.appendChild(link);
+    }
+    link.href = url;
+  }
+
+  function getPostIdFromUrl(){
+    const sp = new URLSearchParams(window.location.search);
+    const qp = sp.get('post');
+    if (qp) return qp;
+    const h = (window.location.hash || '').replace(/^#/, '');
+    if (h.startsWith('post=')) return decodeURIComponent(h.slice(5));
+    return '';
+  }
+
+  function setUrlToPost(id){
+    const url = new URL(window.location.href);
+    url.hash = ''; // prefer query param for shareable links
+    url.searchParams.set('post', id);
+    window.history.pushState({}, '', url.toString());
+  }
+
+  function setUrlToHome(){
+    const url = new URL(window.location.href);
+    url.hash = '';
+    url.searchParams.delete('post');
+    window.history.pushState({}, '', url.toString());
+  }
+
   /**********************
    * Global error surfacing (so "0 loaded" isn't silent)
    **********************/
@@ -1037,6 +1119,21 @@
     }
 
     el('postTitle').textContent = post.title;
+    // Update SEO (best-effort; some crawlers don't run JS)
+    document.title = `${post.title} | Itinerary Index`;
+    const desc = excerptFor(post) || 'Practical destination guides with hotels, local food, and travel tips.';
+    setMeta('description', desc, false);
+    setMeta('og:title', document.title, true);
+    setMeta('og:description', desc, true);
+    setMeta('twitter:title', document.title, false);
+    setMeta('twitter:description', desc, false);
+    const canonical = SITE_URL + `?post=${encodeURIComponent(post.id)}`;
+    setCanonical(canonical);
+    setMeta('og:url', canonical, true);
+    const ogImage = post.coverImage ? (SITE_URL + post.coverImage.replace(/^\/+/, '')) : "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg";
+    setMeta('og:image', ogImage, true);
+    setMeta('twitter:image', ogImage, false);
+
     const dateStr = formatDate(post);
     const mins = estimateReadTime(post.content);
     el('postMeta').innerHTML = `${dateStr ? escapeHtml(dateStr) : ''}${dateStr ? ' • ' : ''}${mins} min read`;
@@ -1075,24 +1172,28 @@
   }
 
   function goHome(){
-    window.location.hash = 'home';
+    setUrlToHome();
     setView('list');
+    document.title = 'Itinerary Index';
+    setMeta('description', 'Travel destinations, stays, food, and tips.', false);
+    setCanonical(SITE_URL);
+    setMeta('og:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', true);
+    setMeta('og:description', 'Practical destination guides with hotels, local food, and travel tips.', true);
+    setMeta('og:url', SITE_URL, true);
+    setMeta('og:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg", true);
+    setMeta('twitter:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', false);
+    setMeta('twitter:description', 'Practical destination guides with hotels, local food, and travel tips.', false);
+    setMeta('twitter:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg", false);
+
     requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: 'auto' });
     });
   }
 
   function handleHash(){
-    const h = (window.location.hash || '').replace(/^#/, '');
-    if (!h || h === 'home') { setView('list'); return; }
-
-    if (h.startsWith('post=')){
-      const id = decodeURIComponent(h.slice(5));
-      openPostById(id);
-      return;
-    }
-
-    setView('list');
+    const id = getPostIdFromUrl();
+    if (!id){ setView('list'); return; }
+    openPostById(id);
   }
 
   function pickRandomQuote(){
@@ -1105,12 +1206,34 @@
   el('homeBtn').addEventListener('click', goHome);
   el('contactBtn').addEventListener('click', () => {
     setView('list');
+    document.title = 'Itinerary Index';
+    setMeta('description', 'Travel destinations, stays, food, and tips.', false);
+    setCanonical(SITE_URL);
+    setMeta('og:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', true);
+    setMeta('og:description', 'Practical destination guides with hotels, local food, and travel tips.', true);
+    setMeta('og:url', SITE_URL, true);
+    setMeta('og:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg", true);
+    setMeta('twitter:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', false);
+    setMeta('twitter:description', 'Practical destination guides with hotels, local food, and travel tips.', false);
+    setMeta('twitter:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg", false);
+
     requestAnimationFrame(() => {
       document.getElementById('contactSection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
   el('allBtn').addEventListener('click', () => {
     setView('list');
+    document.title = 'Itinerary Index';
+    setMeta('description', 'Travel destinations, stays, food, and tips.', false);
+    setCanonical(SITE_URL);
+    setMeta('og:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', true);
+    setMeta('og:description', 'Practical destination guides with hotels, local food, and travel tips.', true);
+    setMeta('og:url', SITE_URL, true);
+    setMeta('og:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg", true);
+    setMeta('twitter:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', false);
+    setMeta('twitter:description', 'Practical destination guides with hotels, local food, and travel tips.', false);
+    setMeta('twitter:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg", false);
+
     requestAnimationFrame(() => {
       document.querySelector('#featuredPanel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
@@ -1153,6 +1276,7 @@
   });
 
   window.addEventListener('hashchange', handleHash);
+  window.addEventListener('popstate', handleHash);
 
   // Init
   pickRandomQuote();

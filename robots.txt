@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ayushisharmahpu-kushi.github.io/Travel/sitemap.xml
