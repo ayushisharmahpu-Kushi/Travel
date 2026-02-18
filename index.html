@@ -17,13 +17,13 @@
   <meta property="og:title" content="Itinerary Index — India Travel Guides, Hotels & Local Food" />
   <meta property="og:description" content="Practical destination guides with hotels, local food, and travel tips." />
   <meta property="og:url" content="https://ayushisharmahpu-kushi.github.io/Travel/" />
-  <meta property="og:image" content="https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg" />
+  <meta property="og:image" content="https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Itinerary Index — India Travel Guides, Hotels & Local Food" />
   <meta name="twitter:description" content="Practical destination guides with hotels, local food, and travel tips." />
-  <meta name="twitter:image" content="https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg" />
+  <meta name="twitter:image" content="https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg" />
 
   <!-- Structured data -->
   <script type="application/ld+json">
@@ -73,12 +73,12 @@
     }
 
     /* Photo-style travel background.
-       Put your background image at: assets/images/travel-bg.jpg */
+       Put your background image at: assets/images/og-card.jpg */
     body::before{
       content:"";
       position:fixed;
       inset:0;
-      background:url("assets/images/travel-bg.jpg") center/cover no-repeat;
+      background:url("assets/images/og-card.jpg") center/cover no-repeat;
       /* brighter + more visible */
       opacity:.50;
       filter:saturate(1.08) contrast(1.06) brightness(1.10);
@@ -1130,7 +1130,7 @@
     const canonical = SITE_URL + `?post=${encodeURIComponent(post.id)}`;
     setCanonical(canonical);
     setMeta('og:url', canonical, true);
-    const ogImage = post.coverImage ? (SITE_URL + post.coverImage.replace(/^\/+/, '')) : "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg";
+    const ogImage = post.coverImage ? (SITE_URL + post.coverImage.replace(/^\/+/, '')) : "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg";
     setMeta('og:image', ogImage, true);
     setMeta('twitter:image', ogImage, false);
 
@@ -1180,10 +1180,10 @@
     setMeta('og:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', true);
     setMeta('og:description', 'Practical destination guides with hotels, local food, and travel tips.', true);
     setMeta('og:url', SITE_URL, true);
-    setMeta('og:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg", true);
+    setMeta('og:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg", true);
     setMeta('twitter:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', false);
     setMeta('twitter:description', 'Practical destination guides with hotels, local food, and travel tips.', false);
-    setMeta('twitter:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg", false);
+    setMeta('twitter:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg", false);
 
     requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: 'auto' });
@@ -1212,10 +1212,10 @@
     setMeta('og:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', true);
     setMeta('og:description', 'Practical destination guides with hotels, local food, and travel tips.', true);
     setMeta('og:url', SITE_URL, true);
-    setMeta('og:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg", true);
+    setMeta('og:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg", true);
     setMeta('twitter:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', false);
     setMeta('twitter:description', 'Practical destination guides with hotels, local food, and travel tips.', false);
-    setMeta('twitter:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg", false);
+    setMeta('twitter:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg", false);
 
     requestAnimationFrame(() => {
       document.getElementById('contactSection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1229,10 +1229,10 @@
     setMeta('og:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', true);
     setMeta('og:description', 'Practical destination guides with hotels, local food, and travel tips.', true);
     setMeta('og:url', SITE_URL, true);
-    setMeta('og:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg", true);
+    setMeta('og:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg", true);
     setMeta('twitter:title', 'Itinerary Index — India Travel Guides, Hotels & Local Food', false);
     setMeta('twitter:description', 'Practical destination guides with hotels, local food, and travel tips.', false);
-    setMeta('twitter:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/travel-bg.jpg", false);
+    setMeta('twitter:image', "https://ayushisharmahpu-kushi.github.io/Travel/assets/images/og-card.jpg", false);
 
     requestAnimationFrame(() => {
       document.querySelector('#featuredPanel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
