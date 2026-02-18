@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Itinerary Index India</title>
+  <title>Itinerary Index</title>
   <meta name="description" content="Travel destinations, stays, food, and tips." />
   <style>
     :root{
@@ -372,17 +372,17 @@
       animation: planeFly 4.2s cubic-bezier(.22,.61,.36,1) forwards;
     }
     #planeIntro .plane{
-      width:56px;
-      height:56px;
+      width:96px;
+      height:44px;
       color: rgba(15,23,42,.92);
       filter: drop-shadow(0 10px 12px rgba(15,23,42,.20));
     }
     #planeIntro .plane svg{ width:100%; height:100%; display:block; }
     #planeIntro .trail{
       position:absolute;
-      left:-140px;
+      left:-190px;
       top:50%;
-      width:140px;
+      width:190px;
       height:3px;
       background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.9));
       transform: translateY(-50%);
@@ -434,17 +434,114 @@
 <body>
   <!-- Plane intro (appears once on page load) -->
     <div id="planePath" aria-hidden="true"></div>
-<div id="planeIntro" aria-hidden="true"><div class="trail"></div><div class="plane"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<div id="planeIntro" aria-hidden="true"><div class="trail"></div><div class="plane"><svg viewBox="0 0 220 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
-    <linearGradient id="planeGrad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#0f172a" stop-opacity="0.95"/>
-      <stop offset="1" stop-color="#0f172a" stop-opacity="0.75"/>
+    <linearGradient id="jetMetal" x1="0" y1="20" x2="0" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="0.35" stop-color="#e5e7eb"/>
+      <stop offset="0.7" stop-color="#cbd5e1"/>
+      <stop offset="1" stop-color="#94a3b8"/>
+    </linearGradient>
+    <linearGradient id="jetShade" x1="0" y1="28" x2="0" y2="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0f172a" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#0f172a" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="jetStripe" x1="40" y1="50" x2="200" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ef4444" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#f97316" stop-opacity="0.92"/>
     </linearGradient>
   </defs>
-  <!-- stylized plane silhouette -->
-  <path d="M2.4 12.6L21.6 3.2c.3-.14.63.14.51.46l-7.4 18.6c-.12.31-.56.36-.75.09l-3.2-4.5a.55.55 0 0 0-.32-.22L2.6 13.2c-.4-.1-.48-.6-.2-.76z" fill="url(#planeGrad)"/>
-  <path d="M21.2 3.6L11.1 13.7" stroke="#ffffff" stroke-opacity="0.85" stroke-width="1.2" stroke-linecap="round"/>
-  <path d="M11.1 13.7l2.1 7.2" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.1" stroke-linecap="round"/>
+
+  <!-- Fuselage -->
+  <path d="M12 45
+           C18 33 34 27 56 27
+           H162
+           C186 27 202 33 210 41
+           L218 45
+           L210 49
+           C202 57 186 63 162 63
+           H56
+           C34 63 18 57 12 45 Z"
+        fill="url(#jetMetal)" stroke="#0f172a" stroke-opacity="0.22" stroke-width="1.4" />
+
+  <!-- Belly shading -->
+  <path d="M20 49
+           C28 58 40 61 56 61
+           H162
+           C178 61 192 57 203 50
+           C194 59 180 66 162 66
+           H56
+           C38 66 25 59 20 49 Z"
+        fill="url(#jetShade)" opacity="0.9"/>
+
+  <!-- Cockpit -->
+  <path d="M26 45
+           C30 38 36 35 44 35
+           C49 35 52 36 55 38
+           C47 40 40 43 34 48
+           C31 50 28 49 26 45 Z"
+        fill="#0f172a" opacity="0.55"/>
+
+  <!-- Windows -->
+  <g opacity="0.7" fill="#0f172a">
+    <circle cx="64" cy="41" r="2.2"/>
+    <circle cx="76" cy="41" r="2.2"/>
+    <circle cx="88" cy="41" r="2.2"/>
+    <circle cx="100" cy="41" r="2.2"/>
+    <circle cx="112" cy="41" r="2.2"/>
+    <circle cx="124" cy="41" r="2.2"/>
+    <circle cx="136" cy="41" r="2.2"/>
+    <circle cx="148" cy="41" r="2.2"/>
+    <circle cx="160" cy="41" r="2.2"/>
+  </g>
+
+  <!-- Stripe -->
+  <path d="M52 50 H170
+           C178 50 186 48 193 45
+           C186 52 178 54 170 54
+           H52 Z"
+        fill="url(#jetStripe)" opacity="0.85"/>
+
+  <!-- Wings -->
+  <path d="M92 50
+           L140 50
+           L170 78
+           L148 78
+           L122 60
+           L84 60 Z"
+        fill="#cbd5e1" stroke="#0f172a" stroke-opacity="0.18" stroke-width="1.1"/>
+
+  <!-- Wing top highlight -->
+  <path d="M96 52 L137 52 L160 74 L150 74 L124 58 L88 58 Z"
+        fill="#ffffff" opacity="0.35"/>
+
+  <!-- Engines -->
+  <g>
+    <ellipse cx="132" cy="66" rx="12.5" ry="7.2" fill="#e5e7eb" stroke="#0f172a" stroke-opacity="0.18" stroke-width="1"/>
+    <ellipse cx="132" cy="66" rx="8.5" ry="4.6" fill="#94a3b8" opacity="0.65"/>
+    <ellipse cx="150" cy="70" rx="10.5" ry="6.2" fill="#e5e7eb" stroke="#0f172a" stroke-opacity="0.18" stroke-width="1"/>
+    <ellipse cx="150" cy="70" rx="7.2" ry="4.0" fill="#94a3b8" opacity="0.65"/>
+  </g>
+
+  <!-- Tailplane -->
+  <path d="M170 56 L200 66 L188 72 L162 64 Z"
+        fill="#cbd5e1" stroke="#0f172a" stroke-opacity="0.16" stroke-width="1"/>
+
+  <!-- Tail fin -->
+  <path d="M176 32
+           L196 10
+           L206 10
+           L194 36 Z"
+        fill="#cbd5e1" stroke="#0f172a" stroke-opacity="0.16" stroke-width="1"/>
+  <path d="M184 32 L197 14 L203 14 L195 34 Z" fill="#ffffff" opacity="0.30"/>
+
+  <!-- Nose highlight -->
+  <path d="M12 45
+           C18 33 34 27 56 27
+           C42 30 30 36 24 45
+           C30 54 42 60 56 63
+           C34 63 18 57 12 45 Z"
+        fill="#ffffff" opacity="0.22"/>
 </svg></div></div>
 
   <div class="wrap">
